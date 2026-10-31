@@ -20,11 +20,15 @@ jobs:
       # NOTE: CI is deliberately fully OFFLINE — it never contacts crunchyroll.com.
       # Live verification is a manual, documented step (docs/REPRODUCING.md).
 
-      - name: Decompress the census
-        run: gzip -dk census/2026.10-BD/census-2026.10-BD.full.json.gz
+      - name: Decompress every census
+        run: |
+          gzip -dk census/2026.10-BD/census-2026.10-BD.full.json.gz
+          gzip -dk census/2026.10-US/census-2026.10-US.full.json.gz
 
-      - name: Validate artifacts (JSON + manifest checksums + census self-consistency + syntax)
-        run: make validate
+      - name: Validate all census artifacts (JSON + manifest checksums + self-consistency + syntax)
+        run: |
+          python3 tools/validate.py --release 2026.10-BD
+          python3 tools/validate.py --release 2026.10-US
 
       - name: Token-hygiene check on provenance bundles
         run: make sanitize-check

@@ -4,12 +4,11 @@
 
 **A provenance-complete census of the Crunchyroll catalog.**
 
-![census](https://img.shields.io/badge/census-2026.10--BD-blue)
-![shows](https://img.shields.io/badge/shows-2%2C149-green)
-![episodes](https://img.shields.io/badge/episodes-25%2C729-green)
-![seasons](https://img.shields.io/badge/seasons-1%2C628-green)
-![music_videos](https://img.shields.io/badge/music_videos-4%2C582-green)
-![region](https://img.shields.io/badge/region-BD-orange)
+![census](https://img.shields.io/badge/census-2026.10--BD%20%20%202026.10--US-blue)
+![shows](https://img.shields.io/badge/shows-2%2C149%20per%20region-green)
+![episodes](https://img.shields.io/badge/episodes-71%2C264%20total-green)
+![seasons](https://img.shields.io/badge/seasons-4%2C632%20total-green)
+![music_videos](https://img.shields.io/badge/music_videos-9%2C188%20total-green)
 ![license](https://img.shields.io/badge/code-MIT-lightgrey)
 ![unofficial](https://img.shields.io/badge/unofficial-not_affiliated_with_Crunchyroll-9cf)
 
@@ -30,32 +29,38 @@ discrepancy is classified, documented, and preserved rather than silently "fixed
 
 ---
 
-## Census 2026.10-BD — the first release
+## Censuses — 2026.10-BD & 2026.10-US
 
-Extracted **October 30–31, 2026** from the **Bangladesh-region catalog** (`country: BD`,
-IP-derived at token time; metadata language `en-US`). Region, locale and date are recorded inside
-every artifact.
+Two releases are published, each a complete, verified snapshot of one Crunchyroll
+regional catalog. **Region, locale and date are recorded inside every artifact.**
 
-| Layer | Count |
-|---|---:|
-| Shows (series + movies) — the complete id universe | **2,149** |
-| — available in region | 1,068 |
-| — region-unavailable (kept, with full metadata) | 1,081 |
-| — with popularity rank (from the live Most Popular feed) | 1,098 |
-| Seasons | **1,628** |
-| Episodes (every field verbatim: durations, air dates, versions, subs, maturity…) | **25,729** |
-| Music: artists / music videos / concerts | 411 / **4,582** / 101 |
-| Most Popular page snapshot (separate database) | 1,104 tiles / 1,097 unique shows |
+| Layer | **2026.10-BD** (Bangladesh) | **2026.10-US** (United States) |
+|---|---:|---:|
+| Shows (series + movies) — complete id universe | **2,149** | **2,149** |
+| — available in region | 1,068 | **2,093** |
+| — region-unavailable (kept, with full metadata) | 1,081 | 56 |
+| — with popularity rank (live Most Popular feed) | 1,098 | **2,139** |
+| Seasons | 1,628 | **3,004** |
+| Episodes (every field verbatim: durations, air dates, versions, subs, maturity…) | 25,729 | **45,535** |
+| Music: artists / music videos / concerts | 411 / 4,582 / 101 | 409 / **4,606** / 101 |
+| Most Popular page snapshot (tiles / unique shows) | 1,104 / 1,097 | 2,150 / 2,139 |
 
-The id universe is the **union of three independent enumerations** — the discover/browse feed
-(1,104 tiles), Crunchyroll's public sitemaps (2,044 series URLs), and the original page capture —
-because no single source is complete: 1,051 sitemap series never appear in the browse index
-(region-unavailable titles), and 104 browse-index series are absent from the sitemap.
+The same series can resolve completely differently per region — *Attack on Titan* and
+*Detective Conan* are absent from the BD catalog but fully present in the US one, and
+the Fairy Tail per-audio duplicate-season structure (a BD census quirk) doesn't exist
+in the US catalog. Regional licensing is the dominant variable in catalog shape.
+
+Each id universe is the **union of three independent enumerations** — the discover/browse
+feed, Crunchyroll's public sitemaps, and prior captures — because no single source is
+complete: in BD, 1,051 sitemap series never appear in the browse index (region-unavailable
+titles); in the US only 56 don't.
 
 ## Quick start
 
+Every example below works identically for `census/2026.10-US/` — swap the release id.
+
 ```bash
-# decompress the census (13 MB -> 209 MB)
+# decompress a census (13 MB -> 209 MB; the US twin is 21 MB -> 333 MB)
 gzip -dk census/2026.10-BD/census-2026.10-BD.full.json.gz
 
 # top 10 most popular shows
@@ -80,25 +85,29 @@ jq -r '.shows[] | [.popularity_rank, .seasons, .episodes, .title] | @tsv' census
 ## Repository map
 
 ```
-census/2026.10-BD/         THE DATA — a complete, verified census release
-  census-2026.10-BD.full.json.gz   the full database (committed, 13 MB)
-  census-2026.10-BD.full.json       same bytes, uncompressed (local-only; gitignored)
-  census-2026.10-BD.index.json      compact index: id/rank/title/url/counts per show
-  popular-2026.10-BD.json           the Most Popular page database (12 MB, committed)
-  *-build-report.json               extraction-time verification detail
-  *-verification-report.json        independent live verification (all hard checks)
-  MANIFEST.json                     sha256 inventory + headline counts
+census/                         THE DATA — one directory per census release
+  2026.10-BD/                  Bangladesh-region census (Oct 30–31, 2026)
+  2026.10-US/                  United States census (Oct 31, 2026)
+    census-<release>.full.json.gz   the full database (committed; ~13–21 MB)
+    census-<release>.full.json       same bytes, uncompressed (local-only; gitignored)
+    census-<release>.index.json      compact index: id/rank/title/url/counts per show
+    popular-<release>.json           the Most Popular page database (committed)
+    *-build-report.json              extraction-time verification detail
+    *-verification-report.json       independent live verification (all hard checks)
+    MANIFEST.json                    sha256 inventory + headline counts
 provenance/                raw evidence, sanitized + compressed (tar.gz)
-  browse-capture-2026.10.tar.gz      headless-Chrome capture of the live page (5,525 requests)
-  browse-crawl-2026.10.tar.gz        the popularity-feed API crawl (31 pages + exhaustion proof)
-  full-crawl-2026.10.tar.gz          the complete video-tree crawl (~8,000 archived responses)
-  sitemaps-2026.10.tar.gz            Google sitemap inventory (2,044 series / 92,275 watch ids)
-  research-probes-2026.10.tar.gz     research probing captures (surfaces, deep pages, render checks)
+  *-2026.10.tar.gz                the BD census bundles
+  *-2026.10-US.tar.gz             the US census bundles
+  browse-capture-…            headless-Chrome capture of the live page (all requests)
+  browse-crawl-…              the popularity-feed API crawl (pages + exhaustion proof)
+  full-crawl-…                 the complete video-tree crawl (every archived response)
+  sitemaps-…                   Google sitemap inventory (2,044 series / 92,275 watch ids)
+  research-probes-…             research probing captures (surfaces, render checks)
 pipeline/                  the 13-stage extraction + verification pipeline (Node .mjs / Python)
-tools/                     repo utilities: evidence sanitizer, manifest generator
+tools/                      repo utilities: evidence sanitizer, manifest generator, validator
 docs/                      RESEARCH.md · WEB_RESEARCH_REPORT.md · PLAN.md · SCHEMA.md ·
                            QUIRKS.md · REPRODUCING.md
-local/                     (gitignored) working area — regenerable via the pipeline
+local/                     (gitignored) working areas — one per census, regenerable
 ```
 
 **Censuses are versioned like census data**: `census-YYYY.MM-REGION`. The catalog is a living
@@ -128,14 +137,16 @@ publication); `popular-verification-report.json` records the 13 checks on the po
 
 ## Regionality (read this before comparing numbers)
 
-- The region is **BD (Bangladesh)** — determined by IP at token time; `locale=en-US` only selects
-  the metadata *language*. Crunchyroll catalogs differ per region under per-title licensing.
+- The region is **BD (Bangladesh)** for the first census and **US (United States)** for the
+  second — determined by IP at token time; `locale=en-US` only selects the metadata
+  *language*. Crunchyroll catalogs differ per region under per-title licensing.
 - The public sitemap is a **global** inventory (92,275 watch pages ≈ 81.5k canonical episode/movie
-  targets + ~10.7k per-audio-version pages). This region's CMS view exposes 25,122 canonical
-  episodes: 20,409 overlap with the sitemap, 4,713 are BD-visible-but-not-sitemapped, and 71,866
-  sitemap pages belong to other regions. All numbers live in the verification report.
-- **Other regions**: the pipeline is region-agnostic — run it from a different egress and it will
-  issue `census-YYYY.MM-XX` for that region. Contributions welcome (see
+  targets + ~10.7k per-audio-version pages). Each region's CMS view exposes a different subset:
+  BD sees 25,122 canonical episodes (20,409 in the sitemap), the US sees 45,535 (38,369 in the
+  sitemap). ~53k sitemap pages remain outside even the US view. All numbers live in each
+  census's verification report.
+- **Other regions**: the pipeline is region-agnostic — `census-2026.10-US` was issued exactly
+  this way, by running the same pipeline from a different egress. Contributions welcome (see
   [CONTRIBUTING.md](CONTRIBUTING.md)).
 
 ## Ethics & legal

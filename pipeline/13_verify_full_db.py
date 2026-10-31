@@ -35,7 +35,8 @@ from datetime import datetime, timezone
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WORK = os.environ.get("PARI_WORK", os.path.join(ROOT, "local", "work"))
 CENSUS = os.environ.get("PARI_CENSUS", os.path.join(ROOT, "census", "2026.10-BD"))
-DB_PATH = os.path.join(CENSUS, "census-2026.10-BD.full.json")
+RELEASE = os.path.basename(os.path.normpath(CENSUS))
+DB_PATH = os.path.join(CENSUS, f"census-{RELEASE}.full.json")
 CR = os.path.join(WORK, "full-crawl")
 WATCH_IDS = set(open(os.path.join(WORK, "sitemaps", "episode_ids.txt")).read().split())
 SERIES_SITEMAP = set(open(os.path.join(WORK, "sitemaps", "series_ids.txt")).read().split())
@@ -230,8 +231,9 @@ unexplained = [w for w in WATCH_IDS
                and not (locale_suffix_re.match(w) and locale_suffix_re.match(w).group(1) in db_episode_ids)]
 check("episode-id reconciliation computed for the region",
       True,
-      f"BD-CMS canonical episodes: {len(db_episode_ids)}; in global sitemap: {len(in_sitemap_direct)}; "
-      f"BD-visible but not in sitemap: {len(missing_from_sitemap)}")
+      f"{meta['region']['country']}-CMS canonical episodes: {len(db_episode_ids)}; "
+      f"in global sitemap: {len(in_sitemap_direct)}; "
+      f"region-visible but not in sitemap: {len(missing_from_sitemap)}")
 check("locale-suffixed sitemap watch ids that overlap our episodes map to valid version locales",
       len(suffix_unmapped) == 0, f"mapped={suffix_mapped}, unmapped={len(suffix_unmapped)} (sample: {suffix_unmapped[:3]})")
 note("sitemap_watch_id_reconciliation", {
@@ -261,6 +263,7 @@ nonfeed = [s for s in shows if not s.get("browse") and s.get("series")]
 sample = ([feed_shows[0], feed_shows[len(feed_shows) // 2], feed_shows[-1]] if feed_shows else []) + \
          rng.sample(nonfeed, min(8, len(nonfeed)))
 mismatches = []
+live_drift = []
 for s in sample:
     sid = s["id"]
     st, b = curl_json(f"https://www.crunchyroll.com/content/v2/cms/series/{sid}?locale=en-US", H)
@@ -270,11 +273,29 @@ for s in sample:
     d = json.loads(b)["data"][0]
     if (s.get("series") or {}).get("title") != d["title"]:
         mismatches.append((sid, f"title db={s['series'].get('title')!r} live={d['title']!r}"))
-    if s.get("browse") and s["browse"]["series_metadata"]["episode_count"] != d.get("media_count"):
-        mismatches.append((sid, "episode_count != media_count"))
+    # HARD: extraction-time consistency — the popularity-feed episode_count must
+    # equal the CMS media_count recorded in this census at extraction time
+    # (s["series"] is the archived CMS series object, byte-verbatim).
+    if s.get("browse"):
+        if s["browse"]["series_metadata"]["episode_count"] != (s.get("series") or {}).get("media_count"):
+            mismatches.append((sid, f"extraction-time inconsistency: browse={s['browse']['series_metadata']['episode_count']} "
+                                    f"series.media_count={(s.get('series') or {}).get('media_count')}"))
+        # INFORMATIONAL: live drift since extraction (new episodes published since the crawl)
+        if d.get("media_count") != (s.get("series") or {}).get("media_count"):
+            live_drift.append({"id": sid, "title": d["title"],
+                               "at_extraction": (s.get("series") or {}).get("media_count"),
+                               "live_now": d.get("media_count")})
     time.sleep(0.5)
-check(f"CMS identity invariant (title + media_count) on {len(sample)} shows spread across the catalog",
-      not mismatches, f"mismatches: {mismatches[:5]}" if mismatches else "all identical")
+check(f"CMS identity invariant (title + extraction-time media_count) on {len(sample)} shows spread across the catalog",
+      not mismatches, f"mismatches: {mismatches[:5]}" if mismatches else
+      f"all consistent at extraction time; live drift since extraction: {len(live_drift)} shows")
+note("live_drift_since_extraction", {
+    "detail": live_drift,
+    "explanation": "The catalog is live: e.g. an ongoing simulcast can publish a new episode "
+                   "between the crawl and this verification run. Extraction-time consistency "
+                   "is proven inside the census (browse episode_count == archived CMS "
+                   "media_count); live differences are documented, not defects.",
+})
 
 print("\n== 7. Rendered-page checks (headless) ==")
 import tempfile
@@ -332,6 +353,6 @@ report = {
 }
 with open(os.path.join(CENSUS, "full-db-verification-report.json"), "w", encoding="utf-8") as f:
     json.dump(report, f, ensure_ascii=False, indent=2)
-print(f"\nWrote data/full_db_verification.json")
+print(f"\nWrote {os.path.join(CENSUS, 'full-db-verification-report.json')}")
 print(f"ALL HARD CHECKS PASSED: {all_pass}")
 sys.exit(0 if all_pass else 1)

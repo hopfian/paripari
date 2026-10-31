@@ -1,0 +1,647 @@
+{
+  "generated_at_utc": "2026-10-31T15:15:03+00:00",
+  "all_checks_passed": true,
+  "checks": [
+    {
+      "check": "catalog feed exhausted (manifest overflow page empty)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "every universe id has a series envelope",
+      "passed": true,
+      "detail": "missing: []"
+    },
+    {
+      "check": "every series with a 200 envelope has a seasons envelope",
+      "passed": true,
+      "detail": "missing: []"
+    },
+    {
+      "check": "every season (number_of_episodes>0) has an episodes envelope",
+      "passed": true,
+      "detail": "missing: []"
+    },
+    {
+      "check": "episodes response total == received length for every season",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "check": "season number_of_episodes vs episode list: discrepancies recorded & explained (upstream inconsistencies; the episodes array is the authoritative page-facing list)",
+      "passed": true,
+      "detail": "84 upstream-inconsistent seasons recorded (e.g. [('Marginal Prince', 13, 12), ('The Legend Of Hei', 2, 1), ('Welcome, Chitose', 24, 23)])"
+    },
+    {
+      "check": "duplicate episode ids confined to per-audio duplicate seasons within one series, differing only in recent_audio_locale (upstream catalog quirk)",
+      "passed": true,
+      "detail": "0 ids duplicated across per-audio seasons of []; differing fields: []"
+    },
+    {
+      "check": "episode ids unique outside the documented per-audio duplicate-season quirk",
+      "passed": true,
+      "detail": "45535 unique episode ids among 45535 episode entries"
+    },
+    {
+      "check": "no episode references a real season of another series (cross-contamination)",
+      "passed": true,
+      "detail": "bad: []"
+    },
+    {
+      "check": "foreign/phantom season references confined to documented upstream patterns",
+      "passed": true,
+      "detail": "74 episode entries across 10 (series, season) groups reference non-listing season ids (per-audio copies + phantom ids; see upstream_data_quirks)"
+    },
+    {
+      "check": "all sitemap series ids present in DB",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "all catalog-feed ids present in DB",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "sum(episodes per season) == series.episode_count for available series (or reported)",
+      "passed": true,
+      "detail": "1603 series differ under CMS episode_count model (documented counting-model caveat); sample: [{'id': 'G0XHWM00Z', 'via_seasons': 12, 'cms_episode_count': 24}, {'id': 'G0XHWM023', 'via_seasons': 12, 'cms_episode_count': 35}, {'id': 'G0XHWM0D3', 'via_seasons': 24, 'cms_episode_count': 36}]"
+    },
+    {
+      "check": "popularity ranks assigned 1..N contiguously",
+      "passed": true,
+      "detail": "2139 feed shows"
+    }
+  ],
+  "counts": {
+    "shows": 2149,
+    "shows_available": 2093,
+    "shows_not_available": 56,
+    "shows_with_popularity_rank": 2139,
+    "seasons": 3004,
+    "episodes": 45535,
+    "unique_episode_ids": 45535,
+    "music_artists": 409,
+    "music_videos": 4606,
+    "music_concerts": 101
+  },
+  "sum_mismatch_episode_count_model": [
+    {
+      "id": "G0XHWM00Z",
+      "via_seasons": 12,
+      "cms_episode_count": 24
+    },
+    {
+      "id": "G0XHWM023",
+      "via_seasons": 12,
+      "cms_episode_count": 35
+    },
+    {
+      "id": "G0XHWM0D3",
+      "via_seasons": 24,
+      "cms_episode_count": 36
+    },
+    {
+      "id": "G0XHWM0G9",
+      "via_seasons": 12,
+      "cms_episode_count": 24
+    },
+    {
+      "id": "G0XHWM0XW",
+      "via_seasons": 12,
+      "cms_episode_count": 24
+    },
+    {
+      "id": "G0XHWM100",
+      "via_seasons": 12,
+      "cms_episode_count": 24
+    },
+    {
+      "id": "G0XHWM130",
+      "via_seasons": 12,
+      "cms_episode_count": 24
+    },
+    {
+      "id": "G0XHWM140",
+      "via_seasons": 12,
+      "cms_episode_count": 24
+    },
+    {
+      "id": "G0XHWM17X",
+      "via_seasons": 30,
+      "cms_episode_count": 60
+    },
+    {
+      "id": "G0XHWM18P",
+      "via_seasons": 12,
+      "cms_episode_count": 24
+    },
+    {
+      "id": "G0XHWM190",
+      "via_seasons": 13,
+      "cms_episode_count": 26
+    },
+    {
+      "id": "G0XHWM1EK",
+      "via_seasons": 13,
+      "cms_episode_count": 26
+    },
+    {
+      "id": "G0XHWM1MK",
+      "via_seasons": 25,
+      "cms_episode_count": 49
+    },
+    {
+      "id": "G0XHWM1NK",
+      "via_seasons": 47,
+      "cms_episode_count": 94
+    },
+    {
+      "id": "G0XHWM1NV",
+      "via_seasons": 13,
+      "cms_episode_count": 26
+    },
+    {
+      "id": "G0XHWM1PX",
+      "via_seasons": 26,
+      "cms_episode_count": 52
+    },
+    {
+      "id": "G0XHWM1Q0",
+      "via_seasons": 13,
+      "cms_episode_count": 26
+    },
+    {
+      "id": "G0XHWM1VK",
+      "via_seasons": 12,
+      "cms_episode_count": 24
+    },
+    {
+      "id": "G0XHWM1ZK",
+      "via_seasons": 12,
+      "cms_episode_count": 24
+    },
+    {
+      "id": "G0XHWM380",
+      "via_seasons": 24,
+      "cms_episode_count": 72
+    },
+    {
+      "id": "G0XHWM3J0",
+      "via_seasons": 24,
+      "cms_episode_count": 48
+    },
+    {
+      "id": "G0XHWM41M",
+      "via_seasons": 13,
+      "cms_episode_count": 26
+    },
+    {
+      "id": "G0XHWM435",
+      "via_seasons": 47,
+      "cms_episode_count": 94
+    },
+    {
+      "id": "G0XHWM44M",
+      "via_seasons": 12,
+      "cms_episode_count": 24
+    },
+    {
+      "id": "G0XHWM45M",
+      "via_seasons": 36,
+      "cms_episode_count": 60
+    },
+    {
+      "id": "G0XHWM4D8",
+      "via_seasons": 12,
+      "cms_episode_count": 24
+    },
+    {
+      "id": "G0XHWM4KQ",
+      "via_seasons": 12,
+      "cms_episode_count": 24
+    },
+    {
+      "id": "G0XHWM4V5",
+      "via_seasons": 35,
+      "cms_episode_count": 61
+    },
+    {
+      "id": "G0XHWM52V",
+      "via_seasons": 24,
+      "cms_episode_count": 48
+    },
+    {
+      "id": "G0XHWM55N",
+      "via_seasons": 50,
+      "cms_episode_count": 100
+    },
+    {
+      "id": "G0XHWM577",
+      "via_seasons": 24,
+      "cms_episode_count": 48
+    },
+    {
+      "id": "G0XHWM594",
+      "via_seasons": 12,
+      "cms_episode_count": 24
+    },
+    {
+      "id": "G0XHWM5GQ",
+      "via_seasons": 12,
+      "cms_episode_count": 24
+    },
+    {
+      "id": "G0XHWM5N2",
+      "via_seasons": 8,
+      "cms_episode_count": 16
+    },
+    {
+      "id": "G0XHWM5Q4",
+      "via_seasons": 13,
+      "cms_episode_count": 26
+    },
+    {
+      "id": "G0XHWM5V4",
+      "via_seasons": 8,
+      "cms_episode_count": 16
+    },
+    {
+      "id": "G0XHWM5WQ",
+      "via_seasons": 33,
+      "cms_episode_count": 66
+    },
+    {
+      "id": "G0XHWM5X2",
+      "via_seasons": 12,
+      "cms_episode_count": 24
+    },
+    {
+      "id": "G0XHWM5XQ",
+      "via_seasons": 12,
+      "cms_episode_count": 24
+    },
+    {
+      "id": "G0XHWMV4G",
+      "via_seasons": 13,
+      "cms_episode_count": 26
+    },
+    {
+      "id": "G1XHJV008",
+      "via_seasons": 12,
+      "cms_episode_count": 36
+    },
+    {
+      "id": "G1XHJV02M",
+      "via_seasons": 12,
+      "cms_episode_count": 36
+    },
+    {
+      "id": "G1XHJV03M",
+      "via_seasons": 12,
+      "cms_episode_count": 24
+    },
+    {
+      "id": "G1XHJV04W",
+      "via_seasons": 50,
+      "cms_episode_count": 100
+    },
+    {
+      "id": "G1XHJV05V",
+      "via_seasons": 12,
+      "cms_episode_count": 24
+    },
+    {
+      "id": "G1XHJV08M",
+      "via_seasons": 25,
+      "cms_episode_count": 50
+    },
+    {
+      "id": "G1XHJV08V",
+      "via_seasons": 13,
+      "cms_episode_count": 28
+    },
+    {
+      "id": "G1XHJV0D8",
+      "via_seasons": 13,
+      "cms_episode_count": 26
+    },
+    {
+      "id": "G1XHJV0EM",
+      "via_seasons": 13,
+      "cms_episode_count": 26
+    },
+    {
+      "id": "G1XHJV0M7",
+      "via_seasons": 13,
+      "cms_episode_count": 26
+    }
+  ],
+  "season_mismatch": [
+    {
+      "season": "GR5VCDP0W",
+      "api_total": 12,
+      "season_field": 13,
+      "received": 12
+    },
+    {
+      "season": "GR8VCP8K8",
+      "api_total": 1,
+      "season_field": 2,
+      "received": 1
+    },
+    {
+      "season": "G6P5JP9G6",
+      "api_total": 23,
+      "season_field": 24,
+      "received": 23
+    },
+    {
+      "season": "G6P5040Q6",
+      "api_total": 0,
+      "season_field": 26,
+      "received": 0
+    },
+    {
+      "season": "G6P83QQW6",
+      "api_total": 0,
+      "season_field": 26,
+      "received": 0
+    },
+    {
+      "season": "GR1934X26",
+      "api_total": 0,
+      "season_field": 39,
+      "received": 0
+    },
+    {
+      "season": "GYMGC3ZN0",
+      "api_total": 7,
+      "season_field": 12,
+      "received": 7
+    },
+    {
+      "season": "GYX08ME5R",
+      "api_total": 0,
+      "season_field": 13,
+      "received": 0
+    },
+    {
+      "season": "GYE5M48XR",
+      "api_total": 5,
+      "season_field": 6,
+      "received": 5
+    },
+    {
+      "season": "GYX0C47WG",
+      "api_total": 0,
+      "season_field": 5,
+      "received": 0
+    },
+    {
+      "season": "GS00363295JAJP",
+      "api_total": 0,
+      "season_field": 5,
+      "received": 0
+    },
+    {
+      "season": "GS00363296JAJP",
+      "api_total": 0,
+      "season_field": 4,
+      "received": 0
+    },
+    {
+      "season": "GS00363297JAJP",
+      "api_total": 0,
+      "season_field": 6,
+      "received": 0
+    },
+    {
+      "season": "GYNQXW72Y",
+      "api_total": 0,
+      "season_field": 64,
+      "received": 0
+    },
+    {
+      "season": "GYNQ1ZDZY",
+      "api_total": 0,
+      "season_field": 12,
+      "received": 0
+    },
+    {
+      "season": "GYNQJ0Z0Y",
+      "api_total": 14,
+      "season_field": 13,
+      "received": 14
+    },
+    {
+      "season": "GS00002808JAJP",
+      "api_total": 0,
+      "season_field": 2,
+      "received": 0
+    },
+    {
+      "season": "GS00002809JAJP",
+      "api_total": 0,
+      "season_field": 1,
+      "received": 0
+    },
+    {
+      "season": "GS00002810JAJP",
+      "api_total": 0,
+      "season_field": 2,
+      "received": 0
+    },
+    {
+      "season": "GS00002812JAJP",
+      "api_total": 0,
+      "season_field": 2,
+      "received": 0
+    },
+    {
+      "season": "GRVDM5N7R",
+      "api_total": 11,
+      "season_field": 12,
+      "received": 11
+    },
+    {
+      "season": "GR247G826",
+      "api_total": 0,
+      "season_field": 12,
+      "received": 0
+    },
+    {
+      "season": "GR24830E6",
+      "api_total": 0,
+      "season_field": 13,
+      "received": 0
+    },
+    {
+      "season": "GRG5Q3XDR",
+      "api_total": 0,
+      "season_field": 13,
+      "received": 0
+    },
+    {
+      "season": "GR2PW23KR",
+      "api_total": 50,
+      "season_field": 51,
+      "received": 50
+    },
+    {
+      "season": "GRDQ4ZKGY",
+      "api_total": 49,
+      "season_field": 51,
+      "received": 49
+    },
+    {
+      "season": "GYWEXP00Y",
+      "api_total": 24,
+      "season_field": 25,
+      "received": 24
+    },
+    {
+      "season": "G649GMJPY",
+      "api_total": 58,
+      "season_field": 59,
+      "received": 58
+    },
+    {
+      "season": "G6757P91R",
+      "api_total": 31,
+      "season_field": 33,
+      "received": 31
+    },
+    {
+      "season": "GS00363175ENUS",
+      "api_total": 0,
+      "season_field": 1,
+      "received": 0
+    },
+    {
+      "season": "G6DKX1Q1R",
+      "api_total": 10,
+      "season_field": 48,
+      "received": 10
+    },
+    {
+      "season": "GRE5CQPJ0",
+      "api_total": 36,
+      "season_field": 37,
+      "received": 36
+    },
+    {
+      "season": "GRDQCG4NE",
+      "api_total": 11,
+      "season_field": 12,
+      "received": 11
+    },
+    {
+      "season": "GYNQCJEEW",
+      "api_total": 62,
+      "season_field": 63,
+      "received": 62
+    },
+    {
+      "season": "GRGGCV7PG",
+      "api_total": 0,
+      "season_field": 12,
+      "received": 0
+    },
+    {
+      "season": "GMSE00000017ENUS",
+      "api_total": 0,
+      "season_field": 1,
+      "received": 0
+    },
+    {
+      "season": "GMSE00095902JAJP",
+      "api_total": 0,
+      "season_field": 1,
+      "received": 0
+    },
+    {
+      "season": "GMSE0019253301",
+      "api_total": 0,
+      "season_field": 1,
+      "received": 0
+    },
+    {
+      "season": "GY1N4D0GR",
+      "api_total": 0,
+      "season_field": 1,
+      "received": 0
+    },
+    {
+      "season": "GMSE00192694JAJP",
+      "api_total": 0,
+      "season_field": 1,
+      "received": 0
+    },
+    {
+      "season": "GMSE00309878JAJP",
+      "api_total": 0,
+      "season_field": 1,
+      "received": 0
+    },
+    {
+      "season": "GMSE00328952JAJP",
+      "api_total": 0,
+      "season_field": 1,
+      "received": 0
+    },
+    {
+      "season": "GYEX421V6",
+      "api_total": 4,
+      "season_field": 12,
+      "received": 4
+    },
+    {
+      "season": "G6JQ83JER",
+      "api_total": 0,
+      "season_field": 26,
+      "received": 0
+    },
+    {
+      "season": "G6JQZVP8R",
+      "api_total": 0,
+      "season_field": 65,
+      "received": 0
+    },
+    {
+      "season": "GY8VE708Y",
+      "api_total": 11,
+      "season_field": 12,
+      "received": 11
+    },
+    {
+      "season": "GY8VK878Y",
+      "api_total": 0,
+      "season_field": 13,
+      "received": 0
+    },
+    {
+      "season": "GR9PED3J6",
+      "api_total": 0,
+      "season_field": 26,
+      "received": 0
+    },
+    {
+      "season": "GR9VVEKV6",
+      "api_total": 0,
+      "season_field": 14,
+      "received": 0
+    },
+    {
+      "season": "GR9PVMMV6",
+      "api_total": 0,
+      "season_field": 24,
+      "received": 0
+    }
+  ],
+  "missing": {
+    "series": [],
+    "seasons": [],
+    "episodes": []
+  }
+}

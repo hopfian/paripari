@@ -1,0 +1,133 @@
+{
+  "verified_at_utc": "2026-10-31T15:45:01+00:00",
+  "database": "/home/inan/Documents/Projects/Test/paripari/census/2026.10-US/census-2026.10-US.full.json",
+  "db_extracted_at_utc": "2026-10-31T15:15:03+00:00",
+  "region": {
+    "country": "BD (recorded during research probes; see docs/RESEARCH.md)",
+    "locale": "en-US",
+    "note": "Region is IP-derived at token time (anonymous cr_web token); catalogs differ per region. locale=en-US selects metadata language only."
+  },
+  "hard_checks_passed": true,
+  "checks": [
+    {
+      "check": "valid JSON + jq smoke query",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "DB episode totals == raw archive totals",
+      "passed": true,
+      "detail": "db=45535 raw=45535"
+    },
+    {
+      "check": "DB episode id set == raw archive episode id set",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "episode arrays byte-verbatim vs raw archives",
+      "passed": true,
+      "detail": "0 mismatches: []"
+    },
+    {
+      "check": "DB show count == raw series envelopes with content",
+      "passed": true,
+      "detail": "db=2149 raw=2149"
+    },
+    {
+      "check": "DB seasons+episodes counts == meta",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "popularity ranks contiguous 1..N in array order",
+      "passed": true,
+      "detail": "N=2139"
+    },
+    {
+      "check": "shows with rank have browse data; others null",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "len(episodes) == number_of_episodes for every season except the documented upstream set",
+      "passed": true,
+      "detail": "84 mismatches, all documented upstream; undocumented: []"
+    },
+    {
+      "check": "episode back-references correct; foreign season_ids only in documented upstream patterns",
+      "passed": true,
+      "detail": "classified: {'phantom': 74, 'same-series-listing': 0, 'same-series-unlisted': 0, 'cross-series': 0}; meta documents 74 entries; bad: []"
+    },
+    {
+      "check": "raw archive episodes response total == received for every file",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "all sitemap series ids present in DB",
+      "passed": true,
+      "detail": "missing: []"
+    },
+    {
+      "check": "all DB ids valid (have CMS or 404 envelope)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "episode-id reconciliation computed for the region",
+      "passed": true,
+      "detail": "BD-CMS canonical episodes: 45535; in global sitemap: 38369; BD-visible but not in sitemap: 7166"
+    },
+    {
+      "check": "locale-suffixed sitemap watch ids that overlap our episodes map to valid version locales",
+      "passed": true,
+      "detail": "mapped=0, unmapped=0 (sample: [])"
+    },
+    {
+      "check": "CMS identity invariant (title + extraction-time media_count) on 11 shows spread across the catalog",
+      "passed": true,
+      "detail": "all consistent at extraction time; live drift since extraction: 0 shows"
+    },
+    {
+      "check": "sampled series/watch pages render (no SPA-404)",
+      "passed": true,
+      "detail": "checked 5 pages"
+    }
+  ],
+  "informational": {
+    "sitemap_watch_id_reconciliation": {
+      "sitemap_watch_ids": 91286,
+      "db_canonical_episode_ids": 45535,
+      "canonical_episode_ids_in_sitemap": 38369,
+      "db_episodes_not_in_sitemap": 7166,
+      "version_suffixed_watch_ids_resolved": 0,
+      "unresolved_suffixed": 0,
+      "unexplained_watch_ids": 52917,
+      "unexplained_sample": [
+        "G0DUMG02P",
+        "G0DUMG030",
+        "G0DUMG0NK",
+        "G0DUMG0Q0",
+        "G0DUMG0WV",
+        "G0DUMG1D2",
+        "G0DUMG1EM",
+        "G0DUMG1MM",
+        "G0DUMG1PQ",
+        "G0DUMG23D"
+      ],
+      "interpretation": "The sitemap is a GLOBAL inventory (~81.5k canonical + ~10.7k per-audio-version watch pages); this database is the BD-region CMS view. Unexplained ids are episodes/movies of other regions (region-locked or simply not available in BD), plus per-audio-version pages of episodes absent here. Regional asymmetry is expected and quantified here rather than being a completeness defect."
+    },
+    "live_drift_since_extraction": {
+      "detail": [],
+      "explanation": "The catalog is live: e.g. an ongoing simulcast can publish a new episode between the crawl and this verification run. Extraction-time consistency is proven inside the census (browse episode_count == archived CMS media_count); live differences are documented, not defects."
+    },
+    "music": {
+      "artists": 409,
+      "music_videos": 4606,
+      "concerts": 101,
+      "coverage_note": "Crunchyroll exposes NO global music enumeration (artists?/music_videos?/concerts? all 404 — live-probed). Music universe = broad search discovery + complete per-artist expansion (artists/{id}/music_videos, /concerts). Completeness is therefore search-coverage-based; see music.coverage.",
+      "press_claim_2024": "~3,300 music videos & concert specials (see docs/WEB_RESEARCH_REPORT.md §5)"
+    }
+  }
+}

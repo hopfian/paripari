@@ -4,7 +4,8 @@
 to be properties of **Crunchyroll's own catalog data**, not extraction errors. Each was then
 characterized precisely (exact ids, exact field diffs, exact scope) and is preserved **verbatim**
 in the census — nothing was "fixed", dropped, or silently munged. This is the catalogue of
-those findings, current as of census `2026.10-BD`.
+those findings: §1–6 as documented in the **2026.10-BD** census, plus §7 comparing against the
+**2026.10-US** census extracted from the same pipeline.
 
 All of this is also machine-readable inside the census itself:
 `census-*.full.json → database.upstream_data_quirks` (with per-item detail lists).
@@ -15,6 +16,10 @@ All of this is also machine-readable inside the census itself:
 
 **Series:** `G6DQDD3WR` *Fairy Tail* — **329 episode ids each appear 2–3 times** across 9
 season-title groups that Crunchyroll models as per-audio "seasons":
+
+> **Regional note (2026.10-US):** this structure **does not exist in the US catalog** —
+> the US census has 45,535 episode ids, all unique, zero per-audio duplicate seasons.
+> The same series can be packaged completely differently per region.
 
 | Season title | Audio copies |
 |---|---|
@@ -34,9 +39,11 @@ report; `season_id` back-references verified to point at real listings.
 
 ## 2. Phantom season references
 
-**68 episodes across 7 series** carry a `season_id` pointing at a season that the seasons
-endpoint **never exposes** (not present for any series in the region) — hidden, other-region,
-or unpackaged seasons:
+**68 episodes across 7 series (BD census); 74 entries across 10 groups (US census)**
+carry a `season_id` pointing at a season that the seasons endpoint **never exposes**
+(not present for any series in the region) — hidden, other-region, or unpackaged
+seasons. The BD list (the US census records its own set in
+`database.upstream_data_quirks`):
 
 | Series | Listing season | Episodes | Phantom targets |
 |---|---|---:|---|
@@ -53,9 +60,11 @@ either a real same-series listing (Fairy Tail) or one of these phantom ids.
 
 ## 3. Self-inconsistent seasons (`number_of_episodes` vs the actual list)
 
-**21 seasons** where the season object's `number_of_episodes` disagrees with the episode list
-the API itself returns (episodes removed/geo-restricted while the counter wasn't updated —
-or the reverse). The **episodes array is the page-facing truth**; both values are preserved:
+**21 seasons in the BD census; 84 in the US census** where the season object's
+`number_of_episodes` disagrees with the episode list the API itself returns (episodes
+removed/geo-restricted while the counter wasn't updated — or the reverse). More
+available content surfaces more inconsistencies. The **episodes array is the
+page-facing truth**; both values are preserved. The BD list:
 
 | Series | Season | Claimed | Listed | Missing sequence numbers |
 |---|---|---:|---:|---|
@@ -80,11 +89,16 @@ or the reverse). The **episodes array is the page-facing truth**; both values ar
 
 ## 4. The popularity feed lists some shows twice
 
-The live popularity feed can serve the **same show on two tiles** — 7 ids in the
-2026-10-30 snapshot (e.g. *Dorohedoro* at tiles 899 **and** 901), byte-identical entries
-with identical positions in two independently captured sessions. The refreshed crawl
-for this census found 6 such ids. Databases key on unique ids and preserve every raw
-position in `tile_positions`.
+The live popularity feed can serve the **same show on two tiles** — 7 ids in the BD
+snapshot (e.g. *Dorohedoro* at tiles 899 **and** 901), byte-identical entries
+with identical positions in two independently captured sessions; 11 ids in the US
+snapshot. Databases key on unique ids and preserve every raw position in
+`tile_positions`.
+
+**The phenomenon churns heavily over time** (US observations, one evening):
+11 duplicated ids in the API crawl, 21 in the browser capture minutes earlier, and
+**85 in the live feed** during the verification run — the duplicate-tile count is a
+property of the feed's continuous re-ranking, not a stable catalog attribute.
 
 ## 5. Two episode-counting models
 
@@ -103,6 +117,26 @@ also legitimately differ for region-restricted series.
 `audio_locales` / `subtitle_locales` are returned in a **different order on every API call**
 (live-probed: same series, two calls, same members, different order). Compare as sets.
 (The census preserves the order as served at extraction time.)
+
+---
+
+## 7. Regional quirk divergence (BD vs US, October 2026)
+
+Running the same verified pipeline against two regions produced a controlled comparison
+of how Crunchyroll packages catalogs differently:
+
+| Quirk | 2026.10-BD | 2026.10-US |
+|---|---:|---:|
+| Per-audio duplicate seasons (shared episode ids) | 329 ids (Fairy Tail) | **0 — absent** |
+| Self-inconsistent seasons | 21 | 84 |
+| Phantom season references | 68 entries / 7 series | 74 entries / 10 groups |
+| Duplicate tiles in the feed snapshot | 7 | 11 |
+| Series differing under the two counting models | 723 | 1,603 |
+
+A real-time demonstration also got captured during US verification: *Detective Conan*
+(`G6JQVM3ER`) had **587 playable episodes at extraction and 588 two hours later** —
+the archived envelope proves extraction-time consistency; the +1 is a live episode
+publication, documented as drift in the verification report rather than a defect.
 
 ---
 

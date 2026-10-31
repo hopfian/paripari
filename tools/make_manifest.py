@@ -66,11 +66,18 @@ def main():
     census_dir = os.path.join(ROOT, "census", args.census)
     prov_dir = os.path.join(ROOT, "provenance")
 
+    # scope the manifest to THIS census's own provenance bundles:
+    # release "2026.10-US" -> *-2026.10-US.tar.gz; the legacy BD release (2026.10-BD)
+    # -> the un-suffixed *-2026.10.tar.gz bundles. Documentation files (README.md)
+    # are intentionally not checksummed.
+    base = args.census[:-3] if args.census.endswith("-BD") else args.census
+    bundle_suffix = f"-{base}.tar.gz"
+
     files = []
     for name in sorted(os.listdir(census_dir)):
         p = os.path.join(census_dir, name)
-        if not os.path.isfile(p):
-            continue
+        if not os.path.isfile(p) or name == "MANIFEST.json":
+            continue  # a manifest cannot checksum itself
         role, desc = role_for(name)
         local_only = name.endswith(".full.json")  # uncompressed census is gitignored (regenerable from .gz)
         files.append({
@@ -83,7 +90,7 @@ def main():
         })
     for name in sorted(os.listdir(prov_dir)):
         p = os.path.join(prov_dir, name)
-        if not os.path.isfile(p):
+        if not os.path.isfile(p) or not name.endswith(bundle_suffix):
             continue
         role, desc = role_for(name, bundle=True)
         files.append({

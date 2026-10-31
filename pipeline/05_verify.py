@@ -38,7 +38,8 @@ from datetime import datetime, timezone
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WORK = os.environ.get("PARI_WORK", os.path.join(ROOT, "local", "work"))
 CENSUS = os.environ.get("PARI_CENSUS", os.path.join(ROOT, "census", "2026.10-BD"))
-DB_PATH = os.path.join(CENSUS, "popular-2026.10-BD.json")
+RELEASE = os.path.basename(os.path.normpath(CENSUS))
+DB_PATH = os.path.join(CENSUS, f"popular-{RELEASE}.json")
 REPORT_PATH = os.path.join(CENSUS, "popular-verification-report.json")
 
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
@@ -175,12 +176,25 @@ note("live_feed_drift", {
 })
 
 print("\n== 5. CMS identity invariant (like-for-like) ==")
-sample_ranks = sorted(set([1, 2, 3, 50, 250, 500, 750, 1000, 1096, 1097] +
-                          random.Random(20261031).sample(range(4, 1096), 14)))
+N_SHOWS = len(shows)
+anchors = [1, 2, 3, max(1, N_SHOWS // 20), N_SHOWS // 4, N_SHOWS // 2,
+           3 * N_SHOWS // 4, N_SHOWS - 2, N_SHOWS - 1, N_SHOWS]
+sample_ranks = sorted(set(anchors +
+                          random.Random(20261031).sample(range(4, N_SHOWS - 1), min(14, max(0, N_SHOWS - 5)))))
 mismatches = []
 cms_count_diffs = []
+live_drift = []
 for r in sample_ranks:
     s = shows[r - 1]
+    archived_path = os.path.join(WORK, "full-crawl", "series", f"{s['id']}.json")
+    archived_media_count = None
+    if os.path.exists(archived_path):
+        try:
+            env = json.load(open(archived_path, encoding="utf-8"))
+            if env.get("status") == 200:
+                archived_media_count = env["body"]["data"][0].get("media_count")
+        except Exception:
+            pass
     st3, body3 = curl_json(
         f"https://www.crunchyroll.com/content/v2/cms/series/{s['id']}?locale=en-US", HDRS)
     if st3 != 200:
@@ -189,10 +203,21 @@ for r in sample_ranks:
     d = json.loads(body3)["data"][0]
     if d["title"] != s["title"]:
         mismatches.append((r, s["id"], f"title: db={s['title']!r} cms={d['title']!r}"))
-    if d["media_count"] != s["series_metadata"]["episode_count"]:
+    # HARD: extraction-time consistency — the DB value must equal the value the
+    # CMS served at crawl time (archived envelope), when the archive is available.
+    if archived_media_count is not None and archived_media_count != s["series_metadata"]["episode_count"]:
         mismatches.append((r, s["id"],
-                           f"episode_count: db={s['series_metadata']['episode_count']} "
-                           f"cms.media_count={d['media_count']}"))
+                           f"extraction-time inconsistency: db={s['series_metadata']['episode_count']} "
+                           f"archived.media_count={archived_media_count}"))
+    # INFORMATIONAL: live drift since extraction (e.g. a new episode published
+    # between the crawl and this verification run — the catalog is live).
+    if archived_media_count is not None and d["media_count"] != archived_media_count:
+        live_drift.append({
+            "id": s["id"], "title": s["title"],
+            "at_extraction": archived_media_count,
+            "live_now": d["media_count"],
+            "delta": d["media_count"] - archived_media_count,
+        })
     if (d["episode_count"], d["season_count"]) != (s["series_metadata"]["episode_count"],
                                                    s["series_metadata"]["season_count"]):
         cms_count_diffs.append({
@@ -205,8 +230,17 @@ for r in sample_ranks:
         })
     time.sleep(0.25)
 check(f"CMS identity invariant holds for {len(sample_ranks)} spot-checked shows "
-      f"(title + episode_count==media_count; ranks spread 1..1097)",
-      not mismatches, f"mismatches: {mismatches}" if mismatches else "all identical")
+      f"(title + extraction-time episode_count==media_count vs archived envelope; ranks spread across 1..{N_SHOWS})",
+      not mismatches, f"mismatches: {mismatches}" if mismatches else
+      f"all consistent at extraction time; live drift since extraction: {len(live_drift)} shows")
+note("live_drift_since_extraction", {
+    "detail": live_drift,
+    "explanation": "Differences between the archived (extraction-time) media_count and the "
+                   "live value now. The catalog is live: e.g. an ongoing simulcast can "
+                   "publish a new episode between the crawl and this verification run. "
+                   "Extraction-time consistency is proven against the archived envelope; "
+                   "live differences are documented, not defects.",
+})
 note("cms_counting_semantics_differences", {
     "detail": cms_count_diffs,
     "explanation": "The CMS series endpoint's own episode_count/season_count use a different "

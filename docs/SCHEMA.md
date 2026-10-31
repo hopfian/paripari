@@ -23,6 +23,13 @@ nothing dropped or re-typed. The only keys the build *adds* are explicitly marke
 
 ## `database` — the meta block
 
+> **Schema evolution note:** in the `2026.10-BD` census the per-audio duplicate-seasons
+> quirk is recorded under the key `fairy_tail_per_audio_duplicate_seasons` (it was
+> named after its first observed instance). From the `2026.10-US` census onward the
+> generalized key is `per_audio_duplicate_seasons` (with `series` as a list and
+> `per_series_counts`), because the phenomenon is not unique to Fairy Tail. Published
+> censuses are never rewritten; each release documents its own meta schema in place.
+
 | Key | Contents |
 |---|---|
 | `name`, `version` | `crunchyroll_full`, `1.0.0` (internal artifact names, kept for provenance) |

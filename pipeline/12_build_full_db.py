@@ -29,9 +29,11 @@ from datetime import datetime, timezone
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WORK = os.environ.get("PARI_WORK", os.path.join(ROOT, "local", "work"))
 CENSUS = os.environ.get("PARI_CENSUS", os.path.join(ROOT, "census", "2026.10-BD"))
+RELEASE = os.path.basename(os.path.normpath(CENSUS))
+os.makedirs(CENSUS, exist_ok=True)
 CR = os.path.join(WORK, "full-crawl")
-OUT_DB = os.path.join(CENSUS, "census-2026.10-BD.full.json")
-OUT_INDEX = os.path.join(CENSUS, "census-2026.10-BD.index.json")
+OUT_DB = os.path.join(CENSUS, f"census-{RELEASE}.full.json")
+OUT_INDEX = os.path.join(CENSUS, f"census-{RELEASE}.index.json")
 OUT_REPORT = os.path.join(CENSUS, "full-db-build-report.json")
 
 checks = []
@@ -181,28 +183,37 @@ check("season number_of_episodes vs episode list: discrepancies recorded & expla
       len(upstream_mismatches) == len(season_mismatch) and all(u["series_id"] for u in upstream_mismatches),
       f"{len(upstream_mismatches)} upstream-inconsistent seasons recorded (e.g. {[(u['series_title'], u['season_number_of_episodes_claimed'], u['episodes_returned']) for u in upstream_mismatches[:3]]})")
 
-# duplicate episode ids: Fairy Tail per-audio duplicate seasons
+# duplicate episode ids: per-audio duplicate seasons (generalized)
 ep_loc = defaultdict(list)
 for s in shows:
     for season in (s.get("seasons") or []):
         for e in season.get("episodes") or []:
             ep_loc[e["id"]].append((s["id"], season["id"], e))
-dup_owner_series = {occ[0][0] for occ in ep_loc.values() if len(occ) > 1}
+# every duplicated episode id must be confined to ONE series, listed under that
+# series' per-audio duplicate seasons, with copies differing only in
+# recent_audio_locale (generalized upstream quirk; observed for Fairy Tail in 2026.10-BD)
+dup_owners_ok = True
 dup_fields = set()
-for occ in ep_loc.values():
-    if len(occ) > 1:
-        a = occ[0][2]
-        for o in occ[1:]:
-            for k in set(a) | set(o[2]):
-                if json.dumps(a.get(k), sort_keys=True) != json.dumps(o[2].get(k), sort_keys=True):
-                    dup_fields.add(k)
-n_dup_ids = sum(1 for occ in ep_loc.values() if len(occ) > 1)
-check("duplicate episode ids confined to Fairy Tail's per-audio duplicate seasons, "
+dup_groups = defaultdict(list)
+for eid, occ in ep_loc.items():
+    if len(occ) <= 1:
+        continue
+    if len({o[0] for o in occ}) > 1:
+        dup_owners_ok = False
+    dup_groups[occ[0][0]].append(eid)
+    a = occ[0][2]
+    for o in occ[1:]:
+        for k in set(a) | set(o[2]):
+            if json.dumps(a.get(k), sort_keys=True) != json.dumps(o[2].get(k), sort_keys=True):
+                dup_fields.add(k)
+dup_owner_series = set(dup_groups)
+n_dup_ids = sum(len(v) for v in dup_groups.values())
+check("duplicate episode ids confined to per-audio duplicate seasons within one series, "
       "differing only in recent_audio_locale (upstream catalog quirk)",
-      dup_owner_series <= {"G6DQDD3WR"} and dup_fields <= {"recent_audio_locale"},
+      dup_owners_ok and dup_fields <= {"recent_audio_locale"},
       f"{n_dup_ids} ids duplicated across per-audio seasons of {sorted(dup_owner_series)}; "
       f"differing fields: {sorted(dup_fields)}")
-check("episode ids unique outside the documented Fairy Tail quirk", True,
+check("episode ids unique outside the documented per-audio duplicate-season quirk", True,
       f"{len(episode_ids)} unique episode ids among {episode_count} episode entries")
 
 # ---- foreign/phantom season references (upstream catalog properties) ----
@@ -264,7 +275,7 @@ for r in foreign_refs:
 check("foreign/phantom season references confined to documented upstream patterns",
       not same_series_unlisted,
       f"{len(foreign_refs)} episode entries across {len(phantom_summary)} (series, season) groups "
-      f"reference non-listing season ids (Fairy Tail per-audio copies + phantom ids of 7 other series)")
+      f"reference non-listing season ids (per-audio copies + phantom ids; see upstream_data_quirks)")
 del ep_loc
 
 check("all sitemap series ids present in DB", sitemap_ids <= {s["id"] for s in shows})
@@ -456,14 +467,16 @@ database = {
                                "The episodes array is what the site actually lists.",
                 "detail": upstream_mismatches,
             },
-            "fairy_tail_per_audio_duplicate_seasons": {
-                "series": "G6DQDD3WR 'Fairy Tail'",
+            "per_audio_duplicate_seasons": {
+                "series": sorted(dup_owner_series),
                 "n_duplicate_episode_ids": n_dup_ids,
-                "explanation": "Fairy Tail's catalog has per-audio duplicate season entries "
-                               "(e.g. 'Season 1 Part 1 (1-48)' exists as ja-JP, de-DE and en-US "
-                               "seasons) that share the SAME episode ids. The copies differ only in "
-                               "the episode's recent_audio_locale field; sequence numbers are "
-                               "consistent. This is how Crunchyroll's own series page lists it.",
+                "per_series_counts": {k: len(v) for k, v in sorted(dup_groups.items())},
+                "explanation": "Some series' catalogs have per-audio duplicate season entries "
+                               "(e.g. Fairy Tail's 'Season 1 Part 1 (1-48)' exists as ja-JP, de-DE "
+                               "and en-US seasons) that share the SAME episode ids. The copies "
+                               "differ only in the episode's recent_audio_locale field; sequence "
+                               "numbers are consistent. This is how Crunchyroll's own series page "
+                               "lists these shows.",
             },
             "foreign_season_references": {
                 "explanation": "Some episode objects carry a season_id different from the season "
@@ -487,7 +500,7 @@ database = {
             },
             "popularity_feed_duplicate_tiles": {
                 "explanation": "The popularity feed can list a show on two tiles (see "
-                               "census/2026.10-BD/popular-2026.10-BD.json (the verified Popular-page "
+                               f"census/{RELEASE}/popular-{RELEASE}.json (the verified Popular-page "
                                "snapshot); ranks/tiles preserved.",
             },
             "cms_counting_models": {
@@ -507,7 +520,7 @@ database = {
             "raw_archives": "every API response archived as {status, fetched_at, body} envelopes — "
                             "published as compressed bundles under provenance/ "
                             "(browse-crawl, full-crawl, browse-capture, sitemaps, research-probes)",
-            "popular_page_db": "census/2026.10-BD/popular-2026.10-BD.json (the verified Popular-page "
+            "popular_page_db": f"census/{RELEASE}/popular-{RELEASE}.json (the verified Popular-page "
                                "snapshot; ranks here are refreshed from the full-crawl catalog)",
             "research": "docs/RESEARCH.md, docs/WEB_RESEARCH_REPORT.md",
         },
@@ -522,7 +535,7 @@ with open(OUT_DB, "w", encoding="utf-8") as f:
 
 # compact index
 index = {
-    "database": {"generated_at_utc": extracted_at, "note": "compact index of census-2026.10-BD.full.json"},
+    "database": {"generated_at_utc": extracted_at, "note": f"compact index of census-{RELEASE}.full.json"},
     "shows": [
         {
             "id": s["id"],

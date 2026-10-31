@@ -1,0 +1,677 @@
+{
+  "verified_at_utc": "2026-10-31T15:35:15+00:00",
+  "database": "/home/inan/Documents/Projects/Test/paripari/census/2026.10-US/popular-2026.10-US.json",
+  "db_snapshot_extracted_at_utc": "2026-10-31T14:23:53+00:00",
+  "hard_checks_passed": true,
+  "checks": [
+    {
+      "check": "file is valid JSON (jq)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "ranks are exactly 1..N, in array order",
+      "passed": true,
+      "detail": "N=2139"
+    },
+    {
+      "check": "tile_positions cover every raw feed tile exactly once",
+      "passed": true,
+      "detail": "2150 tile positions, range 1..2150"
+    },
+    {
+      "check": "ids unique",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "all urls well-formed (canonical /series/{id}/{slug_title} form)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "meta counts agree with content",
+      "passed": true,
+      "detail": "{'raw_feed_tiles': 2150, 'unique_shows': 2139, 'duplicated_shows': 11, 'api_reported_total': 2150}"
+    },
+    {
+      "check": "live browse endpoint reachable",
+      "passed": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "check": "live top-36 identical to DB ranks 1-36 (id + order)",
+      "passed": true,
+      "detail": "live total=2150, snapshot total=2150"
+    },
+    {
+      "check": "live exhaustion re-check consistent (overflow empty, or live feed grew = documented drift)",
+      "passed": true,
+      "detail": "start=2150 returned 0 items; live total now 2150 vs snapshot 2150"
+    },
+    {
+      "check": "CMS identity invariant holds for 24 spot-checked shows (title + extraction-time episode_count==media_count vs archived envelope; ranks spread across 1..2139)",
+      "passed": true,
+      "detail": "all consistent at extraction time; live drift since extraction: 0 shows"
+    },
+    {
+      "check": "canonical show pages live (HTTP 200)",
+      "passed": true,
+      "detail": "6/6 pages return 200"
+    },
+    {
+      "check": "sample show pages render in the app (not SPA-404)",
+      "passed": true,
+      "detail": "rendered ranks [1, 500, 1097]: titles verified"
+    },
+    {
+      "check": "poster images live (HTTP 200)",
+      "passed": true,
+      "detail": "3/3 OK"
+    }
+  ],
+  "informational": {
+    "live_total_vs_snapshot": {
+      "live": 2150,
+      "snapshot": 2150
+    },
+    "live_feed_drift": {
+      "live_tiles": 2150,
+      "live_unique_ids": 2065,
+      "live_duplicates": 85,
+      "new_shows_in_live_feed": [
+        {
+          "id": "GMTE00002910",
+          "title": "Dragon Ball Z: Wrath of the Dragon",
+          "live_tile_positions": [
+            1863,
+            1913
+          ]
+        },
+        {
+          "id": "GMTE00192543",
+          "title": "Only You (Sub)",
+          "live_tile_positions": [
+            1859,
+            1907
+          ]
+        },
+        {
+          "id": "GMTE00192546",
+          "title": "Lum the Forever (Sub)",
+          "live_tile_positions": [
+            1868,
+            1887
+          ]
+        },
+        {
+          "id": "GMTE00261534",
+          "title": "Backflip!! The Movie",
+          "live_tile_positions": [
+            2036
+          ]
+        },
+        {
+          "id": "GMTE00374450",
+          "title": "That Time I Got Reincarnated as a Slime the Movie: Tears of the Azure Sea",
+          "live_tile_positions": [
+            1758
+          ]
+        },
+        {
+          "id": "GT00355229",
+          "title": "There was a Cute Girl in the Hero's Party, so I Tried Confessing to Her",
+          "live_tile_positions": [
+            2056
+          ]
+        },
+        {
+          "id": "GT00365562",
+          "title": "Even Though I'm a Super Timid Noble Girl, I Accepted the Bet From My Cunning Fiancé",
+          "live_tile_positions": [
+            2057
+          ]
+        },
+        {
+          "id": "GT00365598",
+          "title": "Tamon's B-side",
+          "live_tile_positions": [
+            2076
+          ]
+        },
+        {
+          "id": "GT00371665",
+          "title": "My Ribdiculous Reincarnation",
+          "live_tile_positions": [
+            2145
+          ]
+        },
+        {
+          "id": "GT00374493",
+          "title": "RILAKKUMA",
+          "live_tile_positions": [
+            2140
+          ]
+        }
+      ],
+      "db_shows_no_longer_in_live_feed": [
+        {
+          "id": "G24H1NW9J",
+          "db_rank": 1477
+        },
+        {
+          "id": "G4PH00N1X",
+          "db_rank": 1841
+        },
+        {
+          "id": "G4PH0WJ8V",
+          "db_rank": 2015
+        },
+        {
+          "id": "G5PHNDEGX",
+          "db_rank": 2064
+        },
+        {
+          "id": "G79H23ZJ9",
+          "db_rank": 2031
+        },
+        {
+          "id": "G9VHN9QGG",
+          "db_rank": 1876
+        },
+        {
+          "id": "G9VHNN0KX",
+          "db_rank": 2062
+        },
+        {
+          "id": "GMTE00002705",
+          "db_rank": 1862
+        },
+        {
+          "id": "GMTE00002888",
+          "db_rank": 1988
+        },
+        {
+          "id": "GMTE00002906",
+          "db_rank": 1787
+        },
+        {
+          "id": "GMTE00002908",
+          "db_rank": 2094
+        },
+        {
+          "id": "GMTE00002911",
+          "db_rank": 2000
+        },
+        {
+          "id": "GMTE00002919",
+          "db_rank": 1807
+        },
+        {
+          "id": "GMTE00002920",
+          "db_rank": 1892
+        },
+        {
+          "id": "GMTE00003435",
+          "db_rank": 1760
+        },
+        {
+          "id": "GMTE00003805",
+          "db_rank": 1769
+        },
+        {
+          "id": "GMTE00050832",
+          "db_rank": 1797
+        },
+        {
+          "id": "GMTE00050833",
+          "db_rank": 1796
+        },
+        {
+          "id": "GMTE00096363",
+          "db_rank": 1753
+        },
+        {
+          "id": "GMTE00096364",
+          "db_rank": 1999
+        },
+        {
+          "id": "GMTE00099249",
+          "db_rank": 1852
+        },
+        {
+          "id": "GMTE00102663",
+          "db_rank": 2072
+        },
+        {
+          "id": "GMTE00102665",
+          "db_rank": 1805
+        },
+        {
+          "id": "GMTE00107119",
+          "db_rank": 2022
+        },
+        {
+          "id": "GMTE00107121",
+          "db_rank": 1795
+        },
+        {
+          "id": "GMTE00111913",
+          "db_rank": 1766
+        },
+        {
+          "id": "GMTE00116643",
+          "db_rank": 2020
+        },
+        {
+          "id": "GMTE00192695",
+          "db_rank": 1751
+        },
+        {
+          "id": "GMTE00192696",
+          "db_rank": 1996
+        },
+        {
+          "id": "GMTE00192773",
+          "db_rank": 1794
+        },
+        {
+          "id": "GMTE00199339",
+          "db_rank": 1771
+        },
+        {
+          "id": "GMTE00306932",
+          "db_rank": 1774
+        },
+        {
+          "id": "GMTE00307656",
+          "db_rank": 1857
+        },
+        {
+          "id": "GMTE00309890",
+          "db_rank": 1777
+        },
+        {
+          "id": "GMTE00317715",
+          "db_rank": 1778
+        },
+        {
+          "id": "GMTE00334078",
+          "db_rank": 1836
+        },
+        {
+          "id": "GMTE00337636",
+          "db_rank": 2030
+        },
+        {
+          "id": "GMTE00355226",
+          "db_rank": 1856
+        },
+        {
+          "id": "GMTE00369364",
+          "db_rank": 1755
+        },
+        {
+          "id": "GMTE00380050",
+          "db_rank": 1779
+        },
+        {
+          "id": "GT00170402",
+          "db_rank": 1757
+        },
+        {
+          "id": "GT00258001",
+          "db_rank": 1905
+        },
+        {
+          "id": "GT00324719",
+          "db_rank": 2013
+        },
+        {
+          "id": "GT00337554",
+          "db_rank": 1762
+        },
+        {
+          "id": "GT00351082",
+          "db_rank": 1772
+        },
+        {
+          "id": "GT00351576",
+          "db_rank": 1986
+        },
+        {
+          "id": "GT00356809",
+          "db_rank": 2055
+        },
+        {
+          "id": "GT00361926",
+          "db_rank": 1854
+        },
+        {
+          "id": "GT00361955",
+          "db_rank": 1906
+        },
+        {
+          "id": "GT00362279",
+          "db_rank": 1898
+        },
+        {
+          "id": "GT00362308",
+          "db_rank": 2048
+        },
+        {
+          "id": "GT00364667",
+          "db_rank": 2029
+        },
+        {
+          "id": "GT00364694",
+          "db_rank": 1889
+        },
+        {
+          "id": "GT00364918",
+          "db_rank": 1894
+        },
+        {
+          "id": "GT00365550",
+          "db_rank": 2042
+        },
+        {
+          "id": "GT00365592",
+          "db_rank": 1887
+        },
+        {
+          "id": "GT00365613",
+          "db_rank": 1884
+        },
+        {
+          "id": "GT00365721",
+          "db_rank": 1904
+        },
+        {
+          "id": "GT00365772",
+          "db_rank": 2024
+        },
+        {
+          "id": "GT00365781",
+          "db_rank": 2115
+        },
+        {
+          "id": "GT00365787",
+          "db_rank": 2047
+        },
+        {
+          "id": "GT00366764",
+          "db_rank": 1896
+        },
+        {
+          "id": "GT00366791",
+          "db_rank": 1902
+        },
+        {
+          "id": "GT00371673",
+          "db_rank": 1895
+        },
+        {
+          "id": "GT00371857",
+          "db_rank": 1802
+        },
+        {
+          "id": "GT00371893",
+          "db_rank": 1810
+        },
+        {
+          "id": "GT00375170",
+          "db_rank": 2034
+        },
+        {
+          "id": "GT00378066",
+          "db_rank": 1899
+        },
+        {
+          "id": "GT00378102",
+          "db_rank": 1901
+        },
+        {
+          "id": "GT00378118",
+          "db_rank": 2051
+        },
+        {
+          "id": "GT00378123",
+          "db_rank": 1914
+        },
+        {
+          "id": "GT00379439",
+          "db_rank": 1808
+        },
+        {
+          "id": "GT00383994",
+          "db_rank": 1828
+        },
+        {
+          "id": "GT00383999",
+          "db_rank": 1913
+        },
+        {
+          "id": "GT00384001",
+          "db_rank": 1908
+        },
+        {
+          "id": "GT00384007",
+          "db_rank": 1911
+        },
+        {
+          "id": "GT00384010",
+          "db_rank": 1900
+        },
+        {
+          "id": "GT00385445",
+          "db_rank": 1915
+        },
+        {
+          "id": "GT00385792",
+          "db_rank": 1813
+        },
+        {
+          "id": "GT00391200",
+          "db_rank": 1754
+        },
+        {
+          "id": "GT00393120",
+          "db_rank": 1834
+        },
+        {
+          "id": "GW4HM7WQ5",
+          "db_rank": 1903
+        },
+        {
+          "id": "GXJHM3GZJ",
+          "db_rank": 1873
+        },
+        {
+          "id": "GY79H7ZDP",
+          "db_rank": 2063
+        }
+      ],
+      "rank_displacement": {
+        "max": 72,
+        "median": 0,
+        "mean": 4.16
+      },
+      "top36_identical": true,
+      "top100_set_identical": true,
+      "shows_with_rating_total_changed_since_extraction": 586,
+      "explanation": "Crunchyroll recomputes popularity and rating counters continuously; deep-tail drift over hours is expected and is not a snapshot defect."
+    },
+    "live_drift_since_extraction": {
+      "detail": [],
+      "explanation": "Differences between the archived (extraction-time) media_count and the live value now. The catalog is live: e.g. an ongoing simulcast can publish a new episode between the crawl and this verification run. Extraction-time consistency is proven against the archived envelope; live differences are documented, not defects."
+    },
+    "cms_counting_semantics_differences": {
+      "detail": [
+        {
+          "id": "GY8DWQN5Y",
+          "title": "Golden Kamuy",
+          "db_episode_count": 65,
+          "cms_episode_count": 146,
+          "db_season_count": 6,
+          "cms_season_count": 14,
+          "cms_media_count": 65
+        },
+        {
+          "id": "GYQWNXPZY",
+          "title": "Fire Force",
+          "db_episode_count": 74,
+          "cms_episode_count": 73,
+          "db_season_count": 3,
+          "cms_season_count": 3,
+          "cms_media_count": 74
+        },
+        {
+          "id": "GXJHM3GKX",
+          "title": "The Ossan Newbie Adventurer, Trained to Death by the Most Powerful Party, Became Invincible",
+          "db_episode_count": 12,
+          "cms_episode_count": 24,
+          "db_season_count": 1,
+          "cms_season_count": 2,
+          "cms_media_count": 12
+        },
+        {
+          "id": "GRJQVJNXY",
+          "title": "Saint Seiya",
+          "db_episode_count": 114,
+          "cms_episode_count": 228,
+          "db_season_count": 1,
+          "cms_season_count": 2,
+          "cms_media_count": 114
+        },
+        {
+          "id": "G5PHNM9P0",
+          "title": "WITCH WATCH",
+          "db_episode_count": 25,
+          "cms_episode_count": 75,
+          "db_season_count": 1,
+          "cms_season_count": 2,
+          "cms_media_count": 25
+        },
+        {
+          "id": "GG5H5XQDD",
+          "title": "The Strongest Magician in the Demon Lord's Army was a Human",
+          "db_episode_count": 12,
+          "cms_episode_count": 24,
+          "db_season_count": 1,
+          "cms_season_count": 2,
+          "cms_media_count": 12
+        },
+        {
+          "id": "G6ZXZXZ4R",
+          "title": "Saiyuki Reload",
+          "db_episode_count": 13,
+          "cms_episode_count": 12,
+          "db_season_count": 1,
+          "cms_season_count": 1,
+          "cms_media_count": 13
+        },
+        {
+          "id": "G6JQXP48R",
+          "title": "Cardcaptor Sakura: Clear Card",
+          "db_episode_count": 22,
+          "cms_episode_count": 44,
+          "db_season_count": 1,
+          "cms_season_count": 2,
+          "cms_media_count": 22
+        },
+        {
+          "id": "G9VHN97VE",
+          "title": "Shachibato! President, It's Time for Battle!",
+          "db_episode_count": 12,
+          "cms_episode_count": 24,
+          "db_season_count": 1,
+          "cms_season_count": 2,
+          "cms_media_count": 12
+        },
+        {
+          "id": "GRVDN2JPR",
+          "title": "Lord of Vermilion: The Crimson King",
+          "db_episode_count": 12,
+          "cms_episode_count": 24,
+          "db_season_count": 1,
+          "cms_season_count": 2,
+          "cms_media_count": 12
+        },
+        {
+          "id": "GRDK9DE1Y",
+          "title": "Full Metal Panic: The Second Raid",
+          "db_episode_count": 13,
+          "cms_episode_count": 26,
+          "db_season_count": 1,
+          "cms_season_count": 2,
+          "cms_media_count": 13
+        },
+        {
+          "id": "GZJH3D0VK",
+          "title": "Kanon",
+          "db_episode_count": 24,
+          "cms_episode_count": 48,
+          "db_season_count": 1,
+          "cms_season_count": 2,
+          "cms_media_count": 24
+        },
+        {
+          "id": "G8DHVNJ5V",
+          "title": "Good Luck! Ninomiya-kun",
+          "db_episode_count": 12,
+          "cms_episode_count": 24,
+          "db_season_count": 1,
+          "cms_season_count": 2,
+          "cms_media_count": 12
+        },
+        {
+          "id": "GYMGPXKVY",
+          "title": "AOKANA: Four Rhythm Across the Blue",
+          "db_episode_count": 12,
+          "cms_episode_count": 24,
+          "db_season_count": 1,
+          "cms_season_count": 2,
+          "cms_media_count": 12
+        },
+        {
+          "id": "GR193JZE6",
+          "title": "Gakuen Alice",
+          "db_episode_count": 26,
+          "cms_episode_count": 52,
+          "db_season_count": 1,
+          "cms_season_count": 2,
+          "cms_media_count": 26
+        },
+        {
+          "id": "G65VGN136",
+          "title": "Rainy Cocoa",
+          "db_episode_count": 36,
+          "cms_episode_count": 72,
+          "db_season_count": 3,
+          "cms_season_count": 6,
+          "cms_media_count": 36
+        },
+        {
+          "id": "GT00374496",
+          "title": "Paw & Palaces",
+          "db_episode_count": 7,
+          "cms_episode_count": 14,
+          "db_season_count": 2,
+          "cms_season_count": 2,
+          "cms_media_count": 7
+        },
+        {
+          "id": "GMTE00003780",
+          "title": "Planetarian: Storyteller of the Stars",
+          "db_episode_count": 1,
+          "cms_episode_count": 3,
+          "db_season_count": 1,
+          "cms_season_count": 3,
+          "cms_media_count": 1
+        }
+      ],
+      "explanation": "The CMS series endpoint's own episode_count/season_count use a different counting model (e.g. dub-only seasons/episode entries counted separately) than the popular-page feed. This database's episode_count is what the page displays and equals CMS media_count in every case checked."
+    }
+  }
+}

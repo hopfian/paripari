@@ -33,12 +33,15 @@ A dump claims to contain everything. A census *proves* it, per release:
 | `popular-build-report.json` / `popular-verification-report.json` | The same for the popular-page database. |
 | `MANIFEST.json` | sha256 + size + role for every artifact, plus headline counts. |
 
-## Headline numbers (2026.10-BD)
+## Headline numbers
 
-2,149 shows (1,068 available / 1,081 region-unavailable; 1,098 ranked) ·
-1,628 seasons · 25,729 episodes (25,122 unique) ·
-music: 411 artists / 4,582 music videos / 101 concerts ·
-popular page: 1,104 tiles / 1,097 unique shows.
+| | 2026.10-BD | 2026.10-US |
+|---|---:|---:|
+| shows (available / not available) | 2,149 (1,068 / 1,081) | 2,149 (2,093 / 56) |
+| ranked by the live feed | 1,098 | 2,139 |
+| seasons · episodes | 1,628 · 25,729 | 3,004 · 45,535 |
+| music (artists / MVs / concerts) | 411 / 4,582 / 101 | 409 / 4,606 / 101 |
+| popular page (tiles / unique) | 1,104 / 1,097 | 2,150 / 2,139 |
 
 ## Issuing a new census
 

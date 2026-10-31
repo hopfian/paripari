@@ -1,0 +1,964 @@
+{
+  "generated_at_utc": "2026-10-31T14:23:53+00:00",
+  "all_checks_passed": true,
+  "checks": [
+    {
+      "check": "collected count == API total",
+      "passed": true,
+      "detail": "2150 tiles vs total=2150"
+    },
+    {
+      "check": "pagination contiguous (no gaps/overlaps)",
+      "passed": true,
+      "detail": "60 data pages, start sequence 0..2150"
+    },
+    {
+      "check": "feed exhaustion proven (short last page + empty overflow page)",
+      "passed": true,
+      "detail": "last data page 26/36 items; overflow page at start=2150 returned 0 items"
+    },
+    {
+      "check": "all duplicated feed entries are byte-identical",
+      "passed": true,
+      "detail": "11 duplicated ids: [('GT00365565', [1820, 1838]), ('GMTE00364754', [1869, 1874]), ('GMTE00192547', [1870, 1876]), ('G24H118W1', [1871, 1878]), ('GMTE00002104', [2016, 2017]), ('GT00384009', [2051, 2059]), ('GT00365787', [2052, 2060]), ('GT00362058', [2121, 2131]), ('GT00365781', [2122, 2132]), ('GT00371923', [2123, 2125]), ('GT00364840', [2124, 2126])]"
+    },
+    {
+      "check": "100% coverage of core fields",
+      "passed": true,
+      "detail": "all 17 core fields present in 2150/2150 items"
+    },
+    {
+      "check": "100% coverage of series_metadata fields",
+      "passed": true,
+      "detail": "all 15 metadata fields present in every item"
+    },
+    {
+      "check": "all items are valid content types",
+      "passed": true,
+      "detail": "{'series': 2150}"
+    },
+    {
+      "check": "browser-capture cross-check: same feed size",
+      "passed": true,
+      "detail": "browser: 2150 tiles; API crawl: 2150 tiles"
+    },
+    {
+      "check": "browser-capture cross-check: same feed (id-set overlap >= 95%)",
+      "passed": true,
+      "detail": "2123/2145 shared (98.97%); only-in-API=['G1XHJV0G7', 'G24H118W1', 'GMTE00002917', 'GMTE00003644', 'GMTE00096362', 'GMTE00192547', 'GMTE00364754', 'GT00334040', 'GT00362279', 'GT00365565', 'GT00365721', 'GT00365778', 'GT00366764', 'GT00371673', 'GT00378078', 'GZJH3MMJ2']; only-in-browser=['GMTE00002910', 'GMTE00192543', 'GMTE00192546', 'GMTE00261534', 'GMTE00374450', 'GT00365562']"
+    },
+    {
+      "check": "browser-capture cross-check: identical popularity order (first 36 tiles)",
+      "passed": true,
+      "detail": "first page ids in identical order"
+    },
+    {
+      "check": "browser-capture cross-check: order divergences confined to the tail (beyond first 100 tiles)",
+      "passed": true,
+      "detail": "228 divergent positions, first: [1801, 1802, 1803, 1804, 1805]; inter-pass drift of a live feed is expected and quantified below"
+    },
+    {
+      "check": "browser-capture cross-check: duplicate maps (informational)",
+      "passed": true,
+      "detail": "identical: False; API pass: 11 duplicated ids, browser pass: 21 duplicated ids (duplicates are byte-identical within each pass — verified above)"
+    }
+  ],
+  "browser_capture_cross_check": {
+    "browser_capture_tiles": 2150,
+    "api_crawl_tiles": 2150,
+    "unique_ids_shared": 2123,
+    "id_overlap_ratio": 0.9897,
+    "ids_only_in_api_crawl": [
+      "G1XHJV0G7",
+      "G24H118W1",
+      "GMTE00002917",
+      "GMTE00003644",
+      "GMTE00096362",
+      "GMTE00192547",
+      "GMTE00364754",
+      "GT00334040",
+      "GT00362279",
+      "GT00365565",
+      "GT00365721",
+      "GT00365778",
+      "GT00366764",
+      "GT00371673",
+      "GT00378078",
+      "GZJH3MMJ2"
+    ],
+    "ids_only_in_browser_capture": [
+      "GMTE00002910",
+      "GMTE00192543",
+      "GMTE00192546",
+      "GMTE00261534",
+      "GMTE00374450",
+      "GT00365562"
+    ],
+    "divergent_tile_positions": [
+      1801,
+      1802,
+      1803,
+      1804,
+      1805,
+      1806,
+      1807,
+      1810,
+      1811,
+      1812,
+      1813,
+      1814,
+      1815,
+      1816,
+      1818,
+      1820,
+      1821,
+      1822,
+      1823,
+      1824,
+      1825,
+      1826,
+      1827,
+      1828,
+      1829,
+      1830,
+      1831,
+      1832,
+      1833,
+      1834,
+      1835,
+      1836,
+      1837,
+      1838,
+      1839,
+      1840,
+      1841,
+      1842,
+      1845,
+      1847,
+      1848,
+      1850,
+      1851,
+      1852,
+      1853,
+      1859,
+      1861,
+      1865,
+      1866,
+      1867,
+      1868,
+      1869,
+      1870,
+      1871,
+      1872,
+      1873,
+      1874,
+      1875,
+      1876,
+      1877,
+      1878,
+      1879,
+      1881,
+      1882,
+      1887,
+      1888,
+      1889,
+      1890,
+      1892,
+      1894,
+      1895,
+      1896,
+      1897,
+      1898,
+      1899,
+      1900,
+      1901,
+      1902,
+      1903,
+      1904,
+      1905,
+      1906,
+      1907,
+      1908,
+      1920,
+      1922,
+      1923,
+      1925,
+      1926,
+      1927,
+      1928,
+      1929,
+      1930,
+      1931,
+      1932,
+      1933,
+      1934,
+      1935,
+      1942,
+      1943,
+      1946,
+      1947,
+      1948,
+      1949,
+      1950,
+      1951,
+      1952,
+      1953,
+      1954,
+      1955,
+      1956,
+      1957,
+      1958,
+      1959,
+      1960,
+      1961,
+      1962,
+      1963,
+      1964,
+      1965,
+      1966,
+      1967,
+      1968,
+      1969,
+      1970,
+      1971,
+      1972,
+      1973,
+      1974,
+      1975,
+      1976,
+      1977,
+      1978,
+      1979,
+      1980,
+      1981,
+      1982,
+      1983,
+      1984,
+      1985,
+      1986,
+      1987,
+      1988,
+      1989,
+      1990,
+      1991,
+      1992,
+      1993,
+      1994,
+      1995,
+      1996,
+      1997,
+      1998,
+      1999,
+      2000,
+      2002,
+      2007,
+      2008,
+      2009,
+      2011,
+      2012,
+      2016,
+      2053,
+      2054,
+      2055,
+      2056,
+      2057,
+      2058,
+      2059,
+      2060,
+      2062,
+      2063,
+      2064,
+      2068,
+      2069,
+      2070,
+      2071,
+      2072,
+      2073,
+      2074,
+      2076,
+      2077,
+      2078,
+      2079,
+      2081,
+      2082,
+      2083,
+      2084,
+      2095,
+      2096,
+      2098,
+      2099,
+      2100,
+      2107,
+      2108,
+      2109,
+      2110,
+      2113,
+      2115,
+      2116,
+      2117,
+      2118,
+      2119,
+      2120,
+      2121,
+      2122,
+      2123,
+      2127,
+      2128,
+      2129,
+      2133,
+      2134,
+      2135,
+      2136,
+      2137,
+      2138,
+      2139,
+      2140,
+      2141,
+      2142,
+      2143,
+      2144,
+      2145,
+      2146,
+      2147,
+      2148,
+      2149,
+      2150
+    ],
+    "duplicate_map_identical": false,
+    "api_pass_duplicated_ids": {
+      "G24H118W1": [
+        1871,
+        1878
+      ],
+      "GMTE00002104": [
+        2016,
+        2017
+      ],
+      "GMTE00192547": [
+        1870,
+        1876
+      ],
+      "GMTE00364754": [
+        1869,
+        1874
+      ],
+      "GT00362058": [
+        2121,
+        2131
+      ],
+      "GT00364840": [
+        2124,
+        2126
+      ],
+      "GT00365565": [
+        1820,
+        1838
+      ],
+      "GT00365781": [
+        2122,
+        2132
+      ],
+      "GT00365787": [
+        2052,
+        2060
+      ],
+      "GT00371923": [
+        2123,
+        2125
+      ],
+      "GT00384009": [
+        2051,
+        2059
+      ]
+    },
+    "browser_pass_duplicated_ids": {
+      "GMTE00002907": [
+        1872,
+        1875
+      ],
+      "GMTE00002913": [
+        1869,
+        1878
+      ],
+      "GMTE00258738": [
+        1870,
+        1876
+      ],
+      "GMTE00350182": [
+        1871,
+        1877
+      ],
+      "GMTE00374450": [
+        1821,
+        1837
+      ],
+      "GT00362058": [
+        2120,
+        2131
+      ],
+      "GT00364840": [
+        2124,
+        2126
+      ],
+      "GT00365781": [
+        2121,
+        2132
+      ],
+      "GT00365787": [
+        2052,
+        2057
+      ],
+      "GT00371642": [
+        1970,
+        1981
+      ],
+      "GT00371878": [
+        2123,
+        2130
+      ],
+      "GT00371923": [
+        2122,
+        2125
+      ],
+      "GT00374357": [
+        1971,
+        1982
+      ],
+      "GT00378084": [
+        1900,
+        1916
+      ],
+      "GT00378123": [
+        1901,
+        1918
+      ],
+      "GT00378126": [
+        1896,
+        1913
+      ],
+      "GT00383991": [
+        1897,
+        1914
+      ],
+      "GT00383999": [
+        1904,
+        1917
+      ],
+      "GT00384007": [
+        1898,
+        1915
+      ],
+      "GT00384009": [
+        2051,
+        2056
+      ],
+      "GT00385445": [
+        1906,
+        1919
+      ]
+    },
+    "interpretation": "Both passes captured the same feed (same size, same head, >=95% id overlap). Differences quantify the drift of the LIVE popularity feed between the two capture instants (minutes apart): boundary shows entering/leaving and deep-tail rank shuffling. A pass pair that captured the exact same instant (as in census 2026.10-BD) yields zero divergences."
+  },
+  "page_audit": [
+    {
+      "file": "browse-crawl/api_pages/page_001_start_0.json",
+      "start": 0,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_002_start_36.json",
+      "start": 36,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_003_start_72.json",
+      "start": 72,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_004_start_108.json",
+      "start": 108,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_005_start_144.json",
+      "start": 144,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_006_start_180.json",
+      "start": 180,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_007_start_216.json",
+      "start": 216,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_008_start_252.json",
+      "start": 252,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_009_start_288.json",
+      "start": 288,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_010_start_324.json",
+      "start": 324,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_011_start_360.json",
+      "start": 360,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_012_start_396.json",
+      "start": 396,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_013_start_432.json",
+      "start": 432,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_014_start_468.json",
+      "start": 468,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_015_start_504.json",
+      "start": 504,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_016_start_540.json",
+      "start": 540,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_017_start_576.json",
+      "start": 576,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_018_start_612.json",
+      "start": 612,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_019_start_648.json",
+      "start": 648,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_020_start_684.json",
+      "start": 684,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_021_start_720.json",
+      "start": 720,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_022_start_756.json",
+      "start": 756,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_023_start_792.json",
+      "start": 792,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_024_start_828.json",
+      "start": 828,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_025_start_864.json",
+      "start": 864,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_026_start_900.json",
+      "start": 900,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_027_start_936.json",
+      "start": 936,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_028_start_972.json",
+      "start": 972,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_029_start_1008.json",
+      "start": 1008,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_030_start_1044.json",
+      "start": 1044,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_031_start_1080.json",
+      "start": 1080,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_032_start_1116.json",
+      "start": 1116,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_033_start_1152.json",
+      "start": 1152,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_034_start_1188.json",
+      "start": 1188,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_035_start_1224.json",
+      "start": 1224,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_036_start_1260.json",
+      "start": 1260,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_037_start_1296.json",
+      "start": 1296,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_038_start_1332.json",
+      "start": 1332,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_039_start_1368.json",
+      "start": 1368,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_040_start_1404.json",
+      "start": 1404,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_041_start_1440.json",
+      "start": 1440,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_042_start_1476.json",
+      "start": 1476,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_043_start_1512.json",
+      "start": 1512,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_044_start_1548.json",
+      "start": 1548,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_045_start_1584.json",
+      "start": 1584,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_046_start_1620.json",
+      "start": 1620,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_047_start_1656.json",
+      "start": 1656,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_048_start_1692.json",
+      "start": 1692,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_049_start_1728.json",
+      "start": 1728,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_050_start_1764.json",
+      "start": 1764,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_051_start_1800.json",
+      "start": 1800,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_052_start_1836.json",
+      "start": 1836,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_053_start_1872.json",
+      "start": 1872,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_054_start_1908.json",
+      "start": 1908,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_055_start_1944.json",
+      "start": 1944,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_056_start_1980.json",
+      "start": 1980,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_057_start_2016.json",
+      "start": 2016,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_058_start_2052.json",
+      "start": 2052,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_059_start_2088.json",
+      "start": 2088,
+      "count": 36,
+      "total": 2150
+    },
+    {
+      "file": "browse-crawl/api_pages/page_060_start_2124.json",
+      "start": 2124,
+      "count": 26,
+      "total": 2150
+    }
+  ],
+  "duplicate_audit": [
+    {
+      "id": "GT00365565",
+      "title": "Easygoing Territory Defense by the Optimistic Lord",
+      "tile_positions": [
+        1820,
+        1838
+      ],
+      "entries_identical": true
+    },
+    {
+      "id": "GMTE00364754",
+      "title": "Zombie Land Saga: Yumeginga Paradise",
+      "tile_positions": [
+        1869,
+        1874
+      ],
+      "entries_identical": true
+    },
+    {
+      "id": "GMTE00192547",
+      "title": "The Final Chapter (Sub)",
+      "tile_positions": [
+        1870,
+        1876
+      ],
+      "entries_identical": true
+    },
+    {
+      "id": "G24H118W1",
+      "title": "Panda Cubed",
+      "tile_positions": [
+        1871,
+        1878
+      ],
+      "entries_identical": true
+    },
+    {
+      "id": "GMTE00002104",
+      "title": "BAYONETTA: Bloody Fate",
+      "tile_positions": [
+        2016,
+        2017
+      ],
+      "entries_identical": true
+    },
+    {
+      "id": "GT00384009",
+      "title": "The World's Strongest Witch",
+      "tile_positions": [
+        2051,
+        2059
+      ],
+      "entries_identical": true
+    },
+    {
+      "id": "GT00365787",
+      "title": "SHIBOYUGI: Playing Death Games to Put Food on the Table",
+      "tile_positions": [
+        2052,
+        2060
+      ],
+      "entries_identical": true
+    },
+    {
+      "id": "GT00362058",
+      "title": "Li'l Miss Vampire Can't Suck Right",
+      "tile_positions": [
+        2121,
+        2131
+      ],
+      "entries_identical": true
+    },
+    {
+      "id": "GT00365781",
+      "title": "The Holy Grail of Eris",
+      "tile_positions": [
+        2122,
+        2132
+      ],
+      "entries_identical": true
+    },
+    {
+      "id": "GT00371923",
+      "title": "The Klutzy Class Monitor and the Girl with the Short Skirt",
+      "tile_positions": [
+        2123,
+        2125
+      ],
+      "entries_identical": true
+    },
+    {
+      "id": "GT00364840",
+      "title": "Pass the Monster Meat, Milady!",
+      "tile_positions": [
+        2124,
+        2126
+      ],
+      "entries_identical": true
+    }
+  ],
+  "duplicate_titles_case_insensitive": {
+    "sword art online": 2,
+    "fate/grand order": 2,
+    "mobile suit gundam": 2,
+    "hakuoki ~demon of the fleeting blossom~": 2,
+    "wakakozake": 2,
+    "the idolm@ster": 2,
+    "yowamushi pedal re:ride": 2,
+    "easygoing territory defense by the optimistic lord": 2,
+    "zombie land saga: yumeginga paradise": 2,
+    "the final chapter (sub)": 2,
+    "panda cubed": 2,
+    "bayonetta: bloody fate": 2,
+    "the world's strongest witch": 2,
+    "shiboyugi: playing death games to put food on the table": 2,
+    "li'l miss vampire can't suck right": 2,
+    "the holy grail of eris": 2,
+    "the klutzy class monitor and the girl with the short skirt": 2,
+    "pass the monster meat, milady!": 2
+  },
+  "stats": {
+    "raw_feed_tiles": 2150,
+    "unique_shows": 2139,
+    "with_awards": 107,
+    "with_images_localized": 2055,
+    "with_content_descriptors": 2024,
+    "empty_descriptions": [
+      "Attack on Titan Movies",
+      "BanG Dream! Movies",
+      "Martian Successor Nadesico: Gekigangar 3",
+      "Monster Strike the Movie: Lucifer Dawn of Despair",
+      "OFFSIDE",
+      "Saint Seiya",
+      "xxxHOLiC (Live Action)"
+    ],
+    "type_breakdown": {
+      "series": 2150
+    }
+  }
+}
