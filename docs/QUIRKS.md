@@ -120,18 +120,40 @@ also legitimately differ for region-restricted series.
 
 ---
 
-## 7. Regional quirk divergence (BD vs US, October 2026)
+## 7. Regional quirk divergence (BD vs US vs JP, October 2026)
 
 Running the same verified pipeline against two regions produced a controlled comparison
 of how Crunchyroll packages catalogs differently:
 
-| Quirk | 2026.10-BD | 2026.10-US |
-|---|---:|---:|
-| Per-audio duplicate seasons (shared episode ids) | 329 ids (Fairy Tail) | **0 — absent** |
-| Self-inconsistent seasons | 21 | 84 |
-| Phantom season references | 68 entries / 7 series | 74 entries / 10 groups |
-| Duplicate tiles in the feed snapshot | 7 | 11 |
-| Series differing under the two counting models | 723 | 1,603 |
+| Quirk | 2026.10-BD | 2026.10-US | 2026.10-JP |
+|---|---:|---:|---:|
+| Per-audio duplicate seasons (shared episode ids) | 329 ids (Fairy Tail) | **0 — absent** | n/a (no episodes) |
+| Self-inconsistent seasons | 21 | 84 | n/a (no seasons) |
+| Phantom season references | 68 entries / 7 series | 74 entries / 10 groups | n/a |
+| Duplicate tiles in the feed snapshot | 7 | 11 | 0 |
+| Series differing under the two counting models | 723 | 1,603 | n/a |
+
+## 8. The blocked-market catalog (2026.10-JP)
+
+Japan is a third regional posture entirely, distinct from partial (BD) or full (US)
+catalogs:
+
+- **The website geo-blocks itself**: every page (including `/videos/popular` and the
+  sitemaps) 301-redirects to `currently-unavailable-in-your-location`
+  ("Some Experiences Not Available in Your Area") — captured with headless Chrome,
+  122 requests, 0 tiles.
+- **The API still serves metadata**: 2,065 series visible, every single one
+  `availability_status: unavailable`, **0 seasons and 0 episodes** across the whole
+  region — a complete but unplayable metadata view.
+- **The popularity feed still ranks 24 titles** (the legacy-survivor catalog:
+  *Mizu no Kotoba*, *Tofugu*, *Eyeshine*, *Fairy Tail Podcast*, *Ixogenesis*…) — a
+  ranking of things that cannot be watched there.
+- **Feed metadata is stale-global in blocked markets**: the feed claims *Mizu no
+  Kotoba* (`GRJ0HK77Z`, rank 1) is `available` with 3 episodes, while the CMS series
+  object says `unavailable`, `season_count: 0`, and the seasons endpoint returns
+  nothing.
+- **Music domain: empty** (0 artists / 0 MVs / 0 concerts), consistent with Crunchyroll
+  Music's documented unavailability in Japan.
 
 A real-time demonstration also got captured during US verification: *Detective Conan*
 (`G6JQVM3ER`) had **587 playable episodes at extraction and 588 two hours later** —

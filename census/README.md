@@ -35,13 +35,19 @@ A dump claims to contain everything. A census *proves* it, per release:
 
 ## Headline numbers
 
-| | 2026.10-BD | 2026.10-US |
-|---|---:|---:|
-| shows (available / not available) | 2,149 (1,068 / 1,081) | 2,149 (2,093 / 56) |
-| ranked by the live feed | 1,098 | 2,139 |
-| seasons · episodes | 1,628 · 25,729 | 3,004 · 45,535 |
-| music (artists / MVs / concerts) | 411 / 4,582 / 101 | 409 / 4,606 / 101 |
-| popular page (tiles / unique) | 1,104 / 1,097 | 2,150 / 2,139 |
+| | 2026.10-BD | 2026.10-US | 2026.10-JP |
+|---|---:|---:|---:|
+| shows (available / not available) | 2,149 (1,068 / 1,081) | 2,149 (2,093 / 56) | 2,065 (0 / 2,065) |
+| ranked by the live feed | 1,098 | 2,139 | 24 |
+| seasons · episodes | 1,628 · 25,729 | 3,004 · 45,535 | 0 · 0 |
+| music (artists / MVs / concerts) | 411 / 4,582 / 101 | 409 / 4,606 / 101 | 0 / 0 / 0 |
+| popular page (tiles / unique) | 1,104 / 1,097 | 2,150 / 2,139 | **n/a — geo-blocked** |
+
+> **Blocked-market censuses** (like 2026.10-JP): the region's website geo-blocks itself,
+> so the `popular-*.json` page-snapshot artifact and its verification reports are
+> legitimately absent; the API popularity feed is still recorded inside the census
+> (`browse` items + `popularity_rank`). See each census's `database` meta and
+> `docs/QUIRKS.md` for the full regional findings.
 
 ## Issuing a new census
 

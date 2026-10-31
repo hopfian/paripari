@@ -24,11 +24,13 @@ jobs:
         run: |
           gzip -dk census/2026.10-BD/census-2026.10-BD.full.json.gz
           gzip -dk census/2026.10-US/census-2026.10-US.full.json.gz
+          gzip -dk census/2026.10-JP/census-2026.10-JP.full.json.gz
 
       - name: Validate all census artifacts (JSON + manifest checksums + self-consistency + syntax)
         run: |
           python3 tools/validate.py --release 2026.10-BD
           python3 tools/validate.py --release 2026.10-US
+          python3 tools/validate.py --release 2026.10-JP
 
       - name: Token-hygiene check on provenance bundles
         run: make sanitize-check

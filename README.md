@@ -4,8 +4,8 @@
 
 **A provenance-complete census of the Crunchyroll catalog.**
 
-![census](https://img.shields.io/badge/census-2026.10--BD%20%20%202026.10--US-blue)
-![shows](https://img.shields.io/badge/shows-2%2C149%20per%20region-green)
+![census](https://img.shields.io/badge/census-2026.10--BD%20·%20US%20·%20JP-blue)
+![shows](https://img.shields.io/badge/shows-6%2C363%20across%203%20regions-green)
 ![episodes](https://img.shields.io/badge/episodes-71%2C264%20total-green)
 ![seasons](https://img.shields.io/badge/seasons-4%2C632%20total-green)
 ![music_videos](https://img.shields.io/badge/music_videos-9%2C188%20total-green)
@@ -29,31 +29,36 @@ discrepancy is classified, documented, and preserved rather than silently "fixed
 
 ---
 
-## Censuses — 2026.10-BD & 2026.10-US
+## Censuses — 2026.10-BD · 2026.10-US · 2026.10-JP
 
-Two releases are published, each a complete, verified snapshot of one Crunchyroll
+Three releases are published, each a complete, verified snapshot of one Crunchyroll
 regional catalog. **Region, locale and date are recorded inside every artifact.**
 
-| Layer | **2026.10-BD** (Bangladesh) | **2026.10-US** (United States) |
-|---|---:|---:|
-| Shows (series + movies) — complete id universe | **2,149** | **2,149** |
-| — available in region | 1,068 | **2,093** |
-| — region-unavailable (kept, with full metadata) | 1,081 | 56 |
-| — with popularity rank (live Most Popular feed) | 1,098 | **2,139** |
-| Seasons | 1,628 | **3,004** |
-| Episodes (every field verbatim: durations, air dates, versions, subs, maturity…) | 25,729 | **45,535** |
-| Music: artists / music videos / concerts | 411 / 4,582 / 101 | 409 / **4,606** / 101 |
-| Most Popular page snapshot (tiles / unique shows) | 1,104 / 1,097 | 2,150 / 2,139 |
+| Layer | **2026.10-BD** (Bangladesh) | **2026.10-US** (United States) | **2026.10-JP** (Japan) |
+|---|---:|---:|---:|
+| Shows (series + movies) — complete id universe | 2,149 | 2,149 | **2,065** |
+| — available in region | 1,068 | 2,093 | **0** |
+| — region-unavailable (kept, with full metadata) | 1,081 | 56 | 2,065 |
+| — with popularity rank (discover/browse feed) | 1,098 | 2,139 | **24** |
+| Seasons | 1,628 | 3,004 | **0** |
+| Episodes (every field verbatim) | 25,729 | 45,535 | **0** |
+| Music: artists / MVs / concerts | 411 / 4,582 / 101 | 409 / 4,606 / 101 | **0 / 0 / 0** |
+| Most Popular page snapshot | 1,104 / 1,097 | 2,150 / 2,139 | **n/a — site geo-blocked** |
+| Census size (gz) | 13 MB | 21 MB | **1.2 MB** |
 
-The same series can resolve completely differently per region — *Attack on Titan* and
-*Detective Conan* are absent from the BD catalog but fully present in the US one, and
-the Fairy Tail per-audio duplicate-season structure (a BD census quirk) doesn't exist
-in the US catalog. Regional licensing is the dominant variable in catalog shape.
+The three censuses now span the full range of regional catalog postures: **partial
+catalog** (BD: roughly half the sitemap universe playable), **full catalog** (US:
+almost everything playable), and **blocked market** (JP: the website geo-blocks itself,
+the API serves metadata-only with zero playable content, yet still ranks a 24-title
+legacy feed). The same series resolves completely differently per region — *Attack on
+Titan* and *Detective Conan* are absent from BD but present in the US; the Fairy Tail
+per-audio duplicate-season structure exists in BD but not the US; and in JP the
+top-ranked feed title (*Mizu no Kotoba*) is itself unwatchable.
 
-Each id universe is the **union of three independent enumerations** — the discover/browse
-feed, Crunchyroll's public sitemaps, and prior captures — because no single source is
-complete: in BD, 1,051 sitemap series never appear in the browse index (region-unavailable
-titles); in the US only 56 don't.
+Each id universe is the **union of independent enumerations** — the discover/browse
+feed, Crunchyroll's public sitemaps (geo-blocked from JP, so that census uses the
+global snapshot with a documented provenance note), and prior captures — because no
+single source is complete.
 
 ## Quick start
 
@@ -88,10 +93,13 @@ jq -r '.shows[] | [.popularity_rank, .seasons, .episodes, .title] | @tsv' census
 census/                         THE DATA — one directory per census release
   2026.10-BD/                  Bangladesh-region census (Oct 30–31, 2026)
   2026.10-US/                  United States census (Oct 31, 2026)
-    census-<release>.full.json.gz   the full database (committed; ~13–21 MB)
+  2026.10-JP/                  Japan census (Oct 31, 2026) — blocked market:
+                                 site geo-blocked, API metadata-only, 0 playable
+                                 episodes, no popular-page artifact (see census meta)
+    census-<release>.full.json.gz   the full database (committed)
     census-<release>.full.json       same bytes, uncompressed (local-only; gitignored)
     census-<release>.index.json      compact index: id/rank/title/url/counts per show
-    popular-<release>.json           the Most Popular page database (committed)
+    popular-<release>.json           the Most Popular page database (where the page exists)
     *-build-report.json              extraction-time verification detail
     *-verification-report.json       independent live verification (all hard checks)
     MANIFEST.json                    sha256 inventory + headline counts

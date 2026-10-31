@@ -1,9 +1,9 @@
 {
-  "verified_at_utc": "2026-10-31T15:45:01+00:00",
+  "verified_at_utc": "2026-10-31T17:01:00+00:00",
   "database": "/home/inan/Documents/Projects/Test/paripari/census/2026.10-US/census-2026.10-US.full.json",
-  "db_extracted_at_utc": "2026-10-31T15:15:03+00:00",
+  "db_extracted_at_utc": "2026-10-31T16:58:27+00:00",
   "region": {
-    "country": "BD (recorded during research probes; see docs/RESEARCH.md)",
+    "country": "US",
     "locale": "en-US",
     "note": "Region is IP-derived at token time (anonymous cr_web token); catalogs differ per region. locale=en-US selects metadata language only."
   },
@@ -77,7 +77,7 @@
     {
       "check": "episode-id reconciliation computed for the region",
       "passed": true,
-      "detail": "BD-CMS canonical episodes: 45535; in global sitemap: 38369; BD-visible but not in sitemap: 7166"
+      "detail": "US-CMS canonical episodes: 45535; in global sitemap: 38369; region-visible but not in sitemap: 7166"
     },
     {
       "check": "locale-suffixed sitemap watch ids that overlap our episodes map to valid version locales",

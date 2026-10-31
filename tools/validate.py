@@ -75,14 +75,19 @@ def main():
     else:
         print("  [note] uncompressed census absent (run `make census-extract`) — skipped deep checks")
 
-    # 4. verification reports record passing runs
+    # 4. verification reports record passing runs (the popular-page report exists
+    #    only for censuses where the region's website serves the Most Popular page;
+    #    blocked-market censuses like 2026.10-JP legitimately omit it)
     for rep in ("full-db-verification-report.json", "popular-verification-report.json"):
         p = os.path.join(census_dir, rep)
+        if rep == "popular-verification-report.json" and not os.path.exists(p):
+            print("  [note] popular-verification-report.json absent (blocked-market census) — skipped")
+            continue
         r = json.load(open(p, encoding="utf-8"))
         key = "hard_checks_passed" if "hard_checks_passed" in r else "all_checks_passed"
         if not r.get(key):
             fail(f"{rep} records a failed verification run")
-    print("  [ok] both verification reports record all-checks-passed")
+    print("  [ok] verification reports record all-checks-passed")
 
     if not args.skip_syntax:
         import subprocess

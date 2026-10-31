@@ -22,6 +22,11 @@ make provenance-extract      # or: for b in provenance/*.tar.gz; do tar -xzf $b 
 | `full-crawl-2026.10-US.tar.gz` | `local/work-US/full-crawl/` | US — 2,149 series envelopes, 2,149 season lists, **3,004 episode lists**, the US music domain (409 artists / 4,606 MVs / 101 concerts), US extras, logs, ledgers. |
 | `sitemaps-2026.10-US.tar.gz` | `local/work-US/sitemaps/` | US snapshot of the (global) sitemap inventory. |
 | `research-probes-2026.10-US.tar.gz` | `local/work-US/research-probes/` | US — render-check captures from the US verification runs. |
+| `browse-capture-2026.10-JP.tar.gz` | `local/work-JP/browse-capture/` | JP — **the geo-block evidence**: the live site redirects to `currently-unavailable-in-your-location` (title: "Some Experiences Not Available in Your Area"); 122 requests, final URL and 0 tiles recorded. |
+| `browse-crawl-2026.10-JP.tar.gz` | `local/work-JP/browse-crawl/` | JP — the 24-tile API feed crawl + exhaustion proof (the feed exists even though the page is blocked). |
+| `full-crawl-2026.10-JP.tar.gz` | `local/work-JP/full-crawl/` | JP — 2,065 series envelopes (all `unavailable`), 2,065 empty seasons-lists, 0 episode lists, empty music domain, JP extras, logs, ledgers. |
+| `sitemaps-2026.10-JP.tar.gz` | `local/work-JP/sitemaps/` | JP — sitemaps are **geo-blocked from JP egress** (301 to the block page); this bundle carries the global snapshot (US-egress fetch, same day) + a `PROVENANCE-NOTE.md` documenting that fact. |
+| `research-probes-2026.10-JP.tar.gz` | `local/work-JP/research-probes/` | JP — render checks confirming series pages serve the block page. |
 
 > Naming: BD bundles carry no region suffix (it was the first census); US bundles are
 > suffixed `-US`. Future censuses should use suffixed names from the start

@@ -4,6 +4,42 @@ All notable changes to the paripari census project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 census releases follow `census-YYYY.MM-REGION` versioning.
 
+## [census-2026.10-JP] — 2026-10-31
+
+The third census: a complete, verified snapshot of the Crunchyroll **Japan catalog**
+(`country: JP`, extracted from a Japanese egress, October 31, 2026) — a **blocked-market
+census**, the most structurally distinct of the three:
+
+- **The Crunchyroll website geo-blocks itself in Japan**: every page redirects to
+  `currently-unavailable-in-your-location` (titled "Welcome | Some Experiences Not
+  Available in Your Area"). Captured with headless Chrome (122 requests, final URL
+  and 0 tiles recorded in the browse-capture bundle).
+- **Sitemaps are geo-blocked too** (HTTP 301 to the block page from JP egress); the
+  census therefore uses the global sitemap snapshot fetched the same day from the US
+  egress, documented in a provenance note inside the bundle.
+- **The API still serves a pure metadata view**: 2,065 series — every one
+  `availability_status: unavailable`, **0 seasons, 0 episodes** across the entire
+  region. No popular-page database artifact is published for this census (the page
+  does not exist here); the API's popularity feed is still fully recorded: 24 ranked
+  titles — the legacy-survivor catalog (*Mizu no Kotoba*, *Tofugu*, *Eyeshine*,
+  *Fairy Tail Podcast*…).
+- **Music domain: empty** (0 artists / 0 MVs / 0 concerts) — consistent with
+  Crunchyroll Music's documented unavailability in Japan.
+- A documented upstream inconsistency: the JP feed claims *Mizu no Kotoba* is
+  `available` while the CMS marks it `unavailable` with 0 seasons — feed metadata is
+  stale-global in blocked markets.
+- All 17 hard checks passed (byte-verbatim recomputation, exhaustion proofs,
+  sitemap reconciliation with the region quantified at zero content).
+
+### Corrections
+
+- **[census-2026.10-US] region label corrected**: the published US census carried the
+  region `country` as a BD-era fallback string due to a log-path bug in stage 12 (the
+  true region — `US` — was recorded in the crawl logs all along). Both affected
+  censuses were rebuilt and re-verified with the fix; the region is now parsed
+  correctly (`US` / `JP`) and the fallback is an explicit "unknown" rather than a
+  wrong default. No show/season/episode data was affected.
+
 ## [census-2026.10-US] — 2026-10-31
 
 The second census: a complete, verified snapshot of the Crunchyroll **United States

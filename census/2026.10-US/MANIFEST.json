@@ -1,6 +1,6 @@
 {
   "census": "2026.10-US",
-  "generated_at_utc": "2026-10-31T15:58:05+00:00",
+  "generated_at_utc": "2026-10-31T17:04:14+00:00",
   "checksum_algorithm": "sha256",
   "counts": {
     "shows": 2149,
@@ -11,16 +11,16 @@
   "files": [
     {
       "path": "census/2026.10-US/census-2026.10-US.full.json",
-      "bytes": 348750602,
-      "sha256": "1d4b56d533e8de43c147d3e27f9982cbd4903d6fe3f9c5575e40bc0e850140da",
+      "bytes": 348750592,
+      "sha256": "43aa3c0720a6adbcfacb7593390f7b396968adda156b9ae8f50dcd11892d9186",
       "role": "census",
       "description": "the full census database (JSON; gunzip the .gz for the uncompressed file)",
       "local_only": true
     },
     {
       "path": "census/2026.10-US/census-2026.10-US.full.json.gz",
-      "bytes": 21269759,
-      "sha256": "656ae69b0c847d68e1fa3ac74a33189ef894ddd75081d5b83035cf2cd6c1ed09",
+      "bytes": 21269760,
+      "sha256": "04f368714eb7388245a3ae3978be0328431f948af9d8da4c61b8a0f3e86805f6",
       "role": "census",
       "description": "the full census database (JSON; gunzip the .gz for the uncompressed file)",
       "local_only": false
@@ -28,7 +28,7 @@
     {
       "path": "census/2026.10-US/census-2026.10-US.index.json",
       "bytes": 671570,
-      "sha256": "c3ed6218cacc85c41183965cfcaa07d4a4d1781993c0179901f1f4e23d42f1e0",
+      "sha256": "edd3b9a5c7bab07f79308773174d1d49ea23710ba6adb0b547d9b90c77fa7e37",
       "role": "census",
       "description": "the full census database (JSON; gunzip the .gz for the uncompressed file)",
       "local_only": false
@@ -36,15 +36,15 @@
     {
       "path": "census/2026.10-US/full-db-build-report.json",
       "bytes": 13539,
-      "sha256": "d886d6b461fbbbe98f3aa838bc66d8a0c8720a076a5883d151be487dc02e8baa",
+      "sha256": "39e7ae61604857f0d4303ba5f712ad3a321119e636698d8137c9644479b657c9",
       "role": "build-report",
       "description": "extraction-time verification detail (build stage 12)",
       "local_only": false
     },
     {
       "path": "census/2026.10-US/full-db-verification-report.json",
-      "bytes": 5056,
-      "sha256": "3395c209f2493095a13e5e176824c18463857d8489254d776e85f349b207d090",
+      "bytes": 5004,
+      "sha256": "3186c6ea973ac607fe67be4fcb1a299c9fe3ed393981cc001b53c5677cd98850",
       "role": "verification-report",
       "description": "independent verification (stage 13), live checks",
       "local_only": false

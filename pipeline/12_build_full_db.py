@@ -376,14 +376,15 @@ reference["subscription_products"] = {
     "cr_fan_pack_1_month": load_extra("product_cr_fan_pack_1_month.json"),
 }
 
-# region from crawl logs
+# region from crawl logs (search both the full-crawl dir and the work root —
+# the original BD run logged inside full-crawl/, later censuses log to $WORK/)
 region_country = None
-for lf in glob.glob(os.path.join(CR, "tree_log*.txt")):
+for lf in glob.glob(os.path.join(CR, "tree_log*.txt")) + glob.glob(os.path.join(WORK, "tree_log*.txt")):
     m = re.search(r"token country: ([A-Z]{2})", open(lf, encoding="utf-8", errors="ignore").read())
     if m:
         region_country = m.group(1)
         break
-region_country = region_country or "BD (recorded during research probes; see docs/RESEARCH.md)"
+region_country = region_country or "unknown (token-country log not found)"
 
 # ---------------- assemble ----------------
 extracted_at = datetime.now(timezone.utc).isoformat(timespec="seconds")
@@ -395,10 +396,12 @@ database = {
     "database": {
         "name": "crunchyroll_full",
         "version": "1.0.0",
-        "description": "Complete Crunchyroll video database (BD region, en-US metadata): every "
+        "description": f"Complete Crunchyroll video database for this census release "
+                       f"({RELEASE}; metadata locale en-US): every "
                        "known series/movie (browse catalog + sitemap universe), all seasons, all "
-                       "episodes, popularity ranks from the Most Popular feed, plus the music "
-                       "domain and reference tables. Every API field is preserved verbatim.",
+                       "episodes, popularity ranks from the discover/browse popularity feed, plus "
+                       "the music domain and reference tables. Every API field is preserved "
+                       "verbatim.",
         "source": "www.crunchyroll.com (content/v2 CMS + discover APIs), sitemaps, music APIs",
         "region": {
             "country": region_country,
@@ -520,8 +523,15 @@ database = {
             "raw_archives": "every API response archived as {status, fetched_at, body} envelopes — "
                             "published as compressed bundles under provenance/ "
                             "(browse-crawl, full-crawl, browse-capture, sitemaps, research-probes)",
-            "popular_page_db": f"census/{RELEASE}/popular-{RELEASE}.json (the verified Popular-page "
-                               "snapshot; ranks here are refreshed from the full-crawl catalog)",
+            "popular_page_db": (
+                f"census/{RELEASE}/popular-{RELEASE}.json (the verified Popular-page "
+                "snapshot; ranks here are refreshed from the full-crawl catalog)"
+                if os.path.exists(os.path.join(CENSUS, f"popular-{RELEASE}.json"))
+                else "not published for this release: the region's Crunchyroll website is "
+                     "geo-blocked (see the browse-capture bundle), so a 'Most Popular page' "
+                     "database does not exist as a page-facing artifact; the API popularity "
+                     "feed is still fully recorded here as browse items + popularity_rank"
+            ),
             "research": "docs/RESEARCH.md, docs/WEB_RESEARCH_REPORT.md",
         },
     },

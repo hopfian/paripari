@@ -1,0 +1,95 @@
+{
+  "generated_at_utc": "2026-10-31T16:58:44+00:00",
+  "all_checks_passed": true,
+  "checks": [
+    {
+      "check": "catalog feed exhausted (manifest overflow page empty)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "every universe id has a series envelope",
+      "passed": true,
+      "detail": "missing: []"
+    },
+    {
+      "check": "every series with a 200 envelope has a seasons envelope",
+      "passed": true,
+      "detail": "missing: []"
+    },
+    {
+      "check": "every season (number_of_episodes>0) has an episodes envelope",
+      "passed": true,
+      "detail": "missing: []"
+    },
+    {
+      "check": "episodes response total == received length for every season",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "check": "season number_of_episodes vs episode list: discrepancies recorded & explained (upstream inconsistencies; the episodes array is the authoritative page-facing list)",
+      "passed": true,
+      "detail": "0 upstream-inconsistent seasons recorded (e.g. [])"
+    },
+    {
+      "check": "duplicate episode ids confined to per-audio duplicate seasons within one series, differing only in recent_audio_locale (upstream catalog quirk)",
+      "passed": true,
+      "detail": "0 ids duplicated across per-audio seasons of []; differing fields: []"
+    },
+    {
+      "check": "episode ids unique outside the documented per-audio duplicate-season quirk",
+      "passed": true,
+      "detail": "0 unique episode ids among 0 episode entries"
+    },
+    {
+      "check": "no episode references a real season of another series (cross-contamination)",
+      "passed": true,
+      "detail": "bad: []"
+    },
+    {
+      "check": "foreign/phantom season references confined to documented upstream patterns",
+      "passed": true,
+      "detail": "0 episode entries across 0 (series, season) groups reference non-listing season ids (per-audio copies + phantom ids; see upstream_data_quirks)"
+    },
+    {
+      "check": "all sitemap series ids present in DB",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "all catalog-feed ids present in DB",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "sum(episodes per season) == series.episode_count for available series (or reported)",
+      "passed": true,
+      "detail": "0 series differ under CMS episode_count model (documented counting-model caveat); sample: []"
+    },
+    {
+      "check": "popularity ranks assigned 1..N contiguously",
+      "passed": true,
+      "detail": "24 feed shows"
+    }
+  ],
+  "counts": {
+    "shows": 2065,
+    "shows_available": 0,
+    "shows_not_available": 2065,
+    "shows_with_popularity_rank": 24,
+    "seasons": 0,
+    "episodes": 0,
+    "unique_episode_ids": 0,
+    "music_artists": 0,
+    "music_videos": 0,
+    "music_concerts": 0
+  },
+  "sum_mismatch_episode_count_model": [],
+  "season_mismatch": [],
+  "missing": {
+    "series": [],
+    "seasons": [],
+    "episodes": []
+  }
+}
