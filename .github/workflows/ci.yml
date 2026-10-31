@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # NOTE: CI is deliberately fully OFFLINE — it never contacts crunchyroll.com.
+      # Live verification is a manual, documented step (docs/REPRODUCING.md).
+
+      - name: Decompress the census
+        run: gzip -dk census/2026.10-BD/census-2026.10-BD.full.json.gz
+
+      - name: Validate artifacts (JSON + manifest checksums + census self-consistency + syntax)
+        run: make validate
+
+      - name: Token-hygiene check on provenance bundles
+        run: make sanitize-check

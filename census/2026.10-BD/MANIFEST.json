@@ -1,0 +1,121 @@
+{
+  "census": "2026.10-BD",
+  "generated_at_utc": "2026-10-31T11:36:40+00:00",
+  "checksum_algorithm": "sha256",
+  "counts": {
+    "shows": 2149,
+    "shows_with_popularity_rank": 1098,
+    "seasons": 1628,
+    "episodes": 25729
+  },
+  "files": [
+    {
+      "path": "census/2026.10-BD/census-2026.10-BD.full.json",
+      "bytes": 219360941,
+      "sha256": "9fbda12a01bfe8f739e479efe18287073a38f939b543b8a30a824c13ae0193b0",
+      "role": "census",
+      "description": "the full census database (JSON; gunzip the .gz for the uncompressed file)",
+      "local_only": true
+    },
+    {
+      "path": "census/2026.10-BD/census-2026.10-BD.full.json.gz",
+      "bytes": 13388734,
+      "sha256": "8779f317b39386aeefb9bf5b7a296f3a9e4fa8a806f994ee83ddf633bf4f923e",
+      "role": "census",
+      "description": "the full census database (JSON; gunzip the .gz for the uncompressed file)",
+      "local_only": false
+    },
+    {
+      "path": "census/2026.10-BD/census-2026.10-BD.index.json",
+      "bytes": 673951,
+      "sha256": "9a67d538ded802d98b410d936881d03a1ff6b1d66436fae3994efc3753920b9d",
+      "role": "census",
+      "description": "the full census database (JSON; gunzip the .gz for the uncompressed file)",
+      "local_only": false
+    },
+    {
+      "path": "census/2026.10-BD/full-db-build-report.json",
+      "bytes": 10298,
+      "sha256": "ba0db3264163bb3c9199c40db536aaf58beab80f766a389365f6dd8266efd42e",
+      "role": "build-report",
+      "description": "extraction-time verification detail (build stage 12)",
+      "local_only": false
+    },
+    {
+      "path": "census/2026.10-BD/full-db-verification-report.json",
+      "bytes": 4570,
+      "sha256": "3af7d1f7bb67598656fc7bf147e70ddd57e06426a12b505223c760af49ffc097",
+      "role": "verification-report",
+      "description": "independent verification (stage 13), live checks",
+      "local_only": false
+    },
+    {
+      "path": "census/2026.10-BD/popular-2026.10-BD.json",
+      "bytes": 12732922,
+      "sha256": "afc82275a3204fe1c0c68dd503063e3ecadb07bb81649ad9026f061d56655f4d",
+      "role": "census-popular",
+      "description": "the Most Popular page snapshot database",
+      "local_only": false
+    },
+    {
+      "path": "census/2026.10-BD/popular-build-report.json",
+      "bytes": 8353,
+      "sha256": "f620df649a7712a0eea60214592128d84eec1dbece566563317549971de08d4b",
+      "role": "census-popular",
+      "description": "the Most Popular page snapshot database",
+      "local_only": false
+    },
+    {
+      "path": "census/2026.10-BD/popular-verification-report.json",
+      "bytes": 9134,
+      "sha256": "b262cbaba33304a21a609d470c09da828b29b3aa28a68ed74099b1b47c3caf97",
+      "role": "census-popular",
+      "description": "the Most Popular page snapshot database",
+      "local_only": false
+    },
+    {
+      "path": "provenance/browse-capture-2026.10.tar.gz",
+      "bytes": 4501517,
+      "sha256": "9bf6fb3920852e8c88c3a50dd00957f0625031d01a7dba297011444fd76c547e",
+      "role": "provenance",
+      "description": "headless-Chrome CDP capture of the live Most Popular page: requests + 552 response bodies",
+      "sanitized": true
+    },
+    {
+      "path": "provenance/browse-crawl-2026.10.tar.gz",
+      "bytes": 784560,
+      "sha256": "fc0e9b1c7ad7b154e2be17684333bac055f8e02e404eb08d04a2f15c829ed4e1",
+      "role": "provenance",
+      "description": "sequential API crawl of the popularity feed (31 pages + exhaustion proof)",
+      "sanitized": true
+    },
+    {
+      "path": "provenance/full-crawl-2026.10.tar.gz",
+      "bytes": 16807450,
+      "sha256": "a119d7bccfec5b9c6f701ac651ae33bae1d8bcefffa502029c005431164da89d",
+      "role": "provenance",
+      "description": "complete video-tree crawl: catalog, series, seasons, episodes, music, extras, logs, ledgers",
+      "sanitized": true
+    },
+    {
+      "path": "provenance/research-probes-2026.10.tar.gz",
+      "bytes": 18948409,
+      "sha256": "249ee8a5154b7b7bdc18c5faa799cfbc0fb5dc85909906514ed46a01c69529d9",
+      "role": "provenance",
+      "description": "research probing captures: listing surfaces, deep pages, render checks",
+      "sanitized": true
+    },
+    {
+      "path": "provenance/sitemaps-2026.10.tar.gz",
+      "bytes": 1729475,
+      "sha256": "03f58e5a79052e65c87d3f4c8f8bb7c80d52d967aa92aefefe6b94ea44dcce76",
+      "role": "provenance",
+      "description": "Google sitemap inventory: 2,044 series URLs, 92,275 watch-page ids, shard stats",
+      "sanitized": true
+    }
+  ],
+  "notes": [
+    "census-*.full.json (uncompressed) is the same byte content as its .gz twin; it is kept locally and excluded from git (GitHub's 100 MiB per-file limit) — decompress the .gz to recreate it.",
+    "All provenance bundles were passed through tools/sanitize_evidence.py (anonymous-token redaction) before publication."
+  ]
+}

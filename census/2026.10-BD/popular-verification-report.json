@@ -1,0 +1,320 @@
+{
+  "verified_at_utc": "2026-10-31T11:34:29+00:00",
+  "database": "/home/inan/Documents/Projects/Test/paripari/census/2026.10-BD/popular-2026.10-BD.json",
+  "db_snapshot_extracted_at_utc": "2026-10-31T11:21:53+00:00",
+  "hard_checks_passed": true,
+  "checks": [
+    {
+      "check": "file is valid JSON (jq)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "ranks are exactly 1..N, in array order",
+      "passed": true,
+      "detail": "N=1097"
+    },
+    {
+      "check": "tile_positions cover every raw feed tile exactly once",
+      "passed": true,
+      "detail": "1104 tile positions, range 1..1104"
+    },
+    {
+      "check": "ids unique",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "all urls well-formed (canonical /series/{id}/{slug_title} form)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "meta counts agree with content",
+      "passed": true,
+      "detail": "{'raw_feed_tiles': 1104, 'unique_shows': 1097, 'duplicated_shows': 7, 'api_reported_total': 1104}"
+    },
+    {
+      "check": "live browse endpoint reachable",
+      "passed": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "check": "live top-36 identical to DB ranks 1-36 (id + order)",
+      "passed": true,
+      "detail": "live total=1105, snapshot total=1104"
+    },
+    {
+      "check": "live exhaustion re-check consistent (overflow empty, or live feed grew = documented drift)",
+      "passed": true,
+      "detail": "start=1104 returned 1 items; live total now 1105 vs snapshot 1104"
+    },
+    {
+      "check": "CMS identity invariant holds for 24 spot-checked shows (title + episode_count==media_count; ranks spread 1..1097)",
+      "passed": true,
+      "detail": "all identical"
+    },
+    {
+      "check": "canonical show pages live (HTTP 200)",
+      "passed": true,
+      "detail": "6/6 pages return 200"
+    },
+    {
+      "check": "sample show pages render in the app (not SPA-404)",
+      "passed": true,
+      "detail": "rendered ranks [1, 500, 1097]: titles verified"
+    },
+    {
+      "check": "poster images live (HTTP 200)",
+      "passed": true,
+      "detail": "3/3 OK"
+    }
+  ],
+  "informational": {
+    "live_total_vs_snapshot": {
+      "live": 1105,
+      "snapshot": 1104
+    },
+    "live_feed_drift": {
+      "live_tiles": 1105,
+      "live_unique_ids": 1103,
+      "live_duplicates": 2,
+      "new_shows_in_live_feed": [
+        {
+          "id": "G1XHJV0G7",
+          "title": "A Gatherer's Adventure in Isekai",
+          "live_tile_positions": [
+            1002
+          ]
+        },
+        {
+          "id": "GMTE00335493",
+          "title": "Special Episode Premium",
+          "live_tile_positions": [
+            867
+          ]
+        },
+        {
+          "id": "GMTE00369364",
+          "title": "Me & Roboco: The Movie",
+          "live_tile_positions": [
+            869
+          ]
+        },
+        {
+          "id": "GP5HJ815K",
+          "title": "My Senpai Is Annoying",
+          "live_tile_positions": [
+            354
+          ]
+        },
+        {
+          "id": "GR79E1Z36",
+          "title": "Anime Say You Radio Ani Raji",
+          "live_tile_positions": [
+            969,
+            973
+          ]
+        },
+        {
+          "id": "GT00365598",
+          "title": "Tamon's B-side",
+          "live_tile_positions": [
+            1084
+          ]
+        },
+        {
+          "id": "GT00380054",
+          "title": "Super Cube",
+          "live_tile_positions": [
+            901
+          ]
+        },
+        {
+          "id": "GT00384001",
+          "title": "FX Fighter Kurumi-chan",
+          "live_tile_positions": [
+            953
+          ]
+        }
+      ],
+      "db_shows_no_longer_in_live_feed": [
+        {
+          "id": "GT00371659",
+          "db_rank": 965
+        },
+        {
+          "id": "GT00389311",
+          "db_rank": 998
+        }
+      ],
+      "rank_displacement": {
+        "max": 35,
+        "median": 1,
+        "mean": 2.25
+      },
+      "top36_identical": true,
+      "top100_set_identical": true,
+      "shows_with_rating_total_changed_since_extraction": 763,
+      "explanation": "Crunchyroll recomputes popularity and rating counters continuously; deep-tail drift over hours is expected and is not a snapshot defect."
+    },
+    "cms_counting_semantics_differences": {
+      "detail": [
+        {
+          "id": "GY8DWQN5Y",
+          "title": "Golden Kamuy",
+          "db_episode_count": 65,
+          "cms_episode_count": 57,
+          "db_season_count": 6,
+          "cms_season_count": 6,
+          "cms_media_count": 65
+        },
+        {
+          "id": "GYQWNXPZY",
+          "title": "Fire Force",
+          "db_episode_count": 74,
+          "cms_episode_count": 73,
+          "db_season_count": 3,
+          "cms_season_count": 3,
+          "cms_media_count": 74
+        },
+        {
+          "id": "GEXH3WKK0",
+          "title": "VINLAND SAGA",
+          "db_episode_count": 48,
+          "cms_episode_count": 96,
+          "db_season_count": 2,
+          "cms_season_count": 4,
+          "cms_media_count": 48
+        },
+        {
+          "id": "GY3VKX1MR",
+          "title": "Hunter x Hunter 2011",
+          "db_episode_count": 148,
+          "cms_episode_count": 357,
+          "db_season_count": 7,
+          "cms_season_count": 15,
+          "cms_media_count": 148
+        },
+        {
+          "id": "G6GG91P26",
+          "title": "Food Wars!",
+          "db_episode_count": 31,
+          "cms_episode_count": 113,
+          "db_season_count": 4,
+          "cms_season_count": 9,
+          "cms_media_count": 31
+        },
+        {
+          "id": "G6Q9GGE26",
+          "title": "I'm Standing on a Million Lives",
+          "db_episode_count": 24,
+          "cms_episode_count": 48,
+          "db_season_count": 2,
+          "cms_season_count": 4,
+          "cms_media_count": 24
+        },
+        {
+          "id": "GXJHM3PZW",
+          "title": "A Galaxy Next Door",
+          "db_episode_count": 12,
+          "cms_episode_count": 24,
+          "db_season_count": 1,
+          "cms_season_count": 2,
+          "cms_media_count": 12
+        },
+        {
+          "id": "GRG5X224R",
+          "title": "Lord El-Melloi II's Case Files {Rail Zeppelin} Grace note",
+          "db_episode_count": 15,
+          "cms_episode_count": 2,
+          "db_season_count": 2,
+          "cms_season_count": 2,
+          "cms_media_count": 15
+        },
+        {
+          "id": "GRDQPN8KY",
+          "title": "How to Keep a Mummy",
+          "db_episode_count": 12,
+          "cms_episode_count": 24,
+          "db_season_count": 1,
+          "cms_season_count": 2,
+          "cms_media_count": 12
+        },
+        {
+          "id": "G24H1NWMJ",
+          "title": "Metallic Rouge",
+          "db_episode_count": 13,
+          "cms_episode_count": 39,
+          "db_season_count": 1,
+          "cms_season_count": 2,
+          "cms_media_count": 13
+        },
+        {
+          "id": "G5PHNM9EJ",
+          "title": "Love Is Indivisible by Twins",
+          "db_episode_count": 13,
+          "cms_episode_count": 26,
+          "db_season_count": 1,
+          "cms_season_count": 2,
+          "cms_media_count": 13
+        },
+        {
+          "id": "G6JQK7D5R",
+          "title": "The Ambition of Oda Nobuna",
+          "db_episode_count": 15,
+          "cms_episode_count": 26,
+          "db_season_count": 1,
+          "cms_season_count": 2,
+          "cms_media_count": 15
+        },
+        {
+          "id": "GEXH3WK20",
+          "title": "Assault Lily BOUQUET",
+          "db_episode_count": 12,
+          "cms_episode_count": 24,
+          "db_season_count": 1,
+          "cms_season_count": 2,
+          "cms_media_count": 12
+        },
+        {
+          "id": "G63VK38ZY",
+          "title": "bunny drop",
+          "db_episode_count": 12,
+          "cms_episode_count": 22,
+          "db_season_count": 1,
+          "cms_season_count": 2,
+          "cms_media_count": 12
+        },
+        {
+          "id": "GJ0H7Q8Z1",
+          "title": "Police in a Pod",
+          "db_episode_count": 13,
+          "cms_episode_count": 26,
+          "db_season_count": 1,
+          "cms_season_count": 2,
+          "cms_media_count": 13
+        },
+        {
+          "id": "G61XQ9716",
+          "title": "THE iDOLM@STER SideM Wakeatte Mini!",
+          "db_episode_count": 12,
+          "cms_episode_count": 24,
+          "db_season_count": 1,
+          "cms_season_count": 2,
+          "cms_media_count": 12
+        },
+        {
+          "id": "GMTE00114968",
+          "title": "Sword Art Online the Movie -Ordinal Scale-",
+          "db_episode_count": 1,
+          "cms_episode_count": 3,
+          "db_season_count": 1,
+          "cms_season_count": 3,
+          "cms_media_count": 1
+        }
+      ],
+      "explanation": "The CMS series endpoint's own episode_count/season_count use a different counting model (e.g. dub-only seasons/episode entries counted separately) than the popular-page feed. This database's episode_count is what the page displays and equals CMS media_count in every case checked."
+    }
+  }
+}

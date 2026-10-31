@@ -1,0 +1,11 @@
+# ---- working area (regenerable; excluded from the published repository) ----
+local/
+
+# ---- oversized originals (the compressed + indexed forms are committed) ----
+census/*/census-*.full.json
+
+# ---- scratch / OS / tooling ----
+__pycache__/
+*.pyc
+.DS_Store
+.node-version

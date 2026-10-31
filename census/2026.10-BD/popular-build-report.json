@@ -1,0 +1,351 @@
+{
+  "generated_at_utc": "2026-10-31T11:21:53+00:00",
+  "all_checks_passed": true,
+  "checks": [
+    {
+      "check": "collected count == API total",
+      "passed": true,
+      "detail": "1104 tiles vs total=1104"
+    },
+    {
+      "check": "pagination contiguous (no gaps/overlaps)",
+      "passed": true,
+      "detail": "31 data pages, start sequence 0..1104"
+    },
+    {
+      "check": "feed exhaustion proven (short last page + empty overflow page)",
+      "passed": true,
+      "detail": "last data page 24/36 items; overflow page at start=1104 returned 0 items"
+    },
+    {
+      "check": "all duplicated feed entries are byte-identical",
+      "passed": true,
+      "detail": "7 duplicated ids: [('GXYZ123', [863, 868]), ('GR9VHDVQM', [864, 867]), ('GT00371893', [899, 901]), ('GT00365775', [936, 937]), ('GRMGE945R', [966, 974]), ('GT00378122', [1005, 1009]), ('GT00371923', [1080, 1083])]"
+    },
+    {
+      "check": "100% coverage of core fields",
+      "passed": true,
+      "detail": "all 17 core fields present in 1104/1104 items"
+    },
+    {
+      "check": "100% coverage of series_metadata fields",
+      "passed": true,
+      "detail": "all 15 metadata fields present in every item"
+    },
+    {
+      "check": "all items are valid content types",
+      "passed": true,
+      "detail": "{'series': 1104}"
+    },
+    {
+      "check": "browser-capture cross-check: same feed size",
+      "passed": true,
+      "detail": "browser: 1104 tiles; API crawl: 1104 tiles"
+    },
+    {
+      "check": "browser-capture cross-check: identical id sets (unique shows)",
+      "passed": true,
+      "detail": "1097 shared; only-in-API=[]; only-in-browser=[]"
+    },
+    {
+      "check": "browser-capture cross-check: identical duplicate map",
+      "passed": true,
+      "detail": "7 duplicated ids in each, same tile positions: True"
+    },
+    {
+      "check": "browser-capture cross-check: identical popularity order (first 36 tiles)",
+      "passed": true,
+      "detail": "first page ids in identical order"
+    },
+    {
+      "check": "browser-capture cross-check: tile-by-tile identical order (entire feed)",
+      "passed": true,
+      "detail": "0 divergent positions"
+    }
+  ],
+  "browser_capture_cross_check": {
+    "browser_capture_tiles": 1104,
+    "api_crawl_tiles": 1104,
+    "unique_ids_shared": 1097,
+    "divergent_tile_positions": [],
+    "duplicate_map_identical": true
+  },
+  "page_audit": [
+    {
+      "file": "data/raw/api_pages/page_001_start_0.json",
+      "start": 0,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_002_start_36.json",
+      "start": 36,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_003_start_72.json",
+      "start": 72,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_004_start_108.json",
+      "start": 108,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_005_start_144.json",
+      "start": 144,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_006_start_180.json",
+      "start": 180,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_007_start_216.json",
+      "start": 216,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_008_start_252.json",
+      "start": 252,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_009_start_288.json",
+      "start": 288,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_010_start_324.json",
+      "start": 324,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_011_start_360.json",
+      "start": 360,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_012_start_396.json",
+      "start": 396,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_013_start_432.json",
+      "start": 432,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_014_start_468.json",
+      "start": 468,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_015_start_504.json",
+      "start": 504,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_016_start_540.json",
+      "start": 540,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_017_start_576.json",
+      "start": 576,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_018_start_612.json",
+      "start": 612,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_019_start_648.json",
+      "start": 648,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_020_start_684.json",
+      "start": 684,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_021_start_720.json",
+      "start": 720,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_022_start_756.json",
+      "start": 756,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_023_start_792.json",
+      "start": 792,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_024_start_828.json",
+      "start": 828,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_025_start_864.json",
+      "start": 864,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_026_start_900.json",
+      "start": 900,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_027_start_936.json",
+      "start": 936,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_028_start_972.json",
+      "start": 972,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_029_start_1008.json",
+      "start": 1008,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_030_start_1044.json",
+      "start": 1044,
+      "count": 36,
+      "total": 1104
+    },
+    {
+      "file": "data/raw/api_pages/page_031_start_1080.json",
+      "start": 1080,
+      "count": 24,
+      "total": 1104
+    }
+  ],
+  "duplicate_audit": [
+    {
+      "id": "GXYZ123",
+      "title": "GXYZ123",
+      "tile_positions": [
+        863,
+        868
+      ],
+      "entries_identical": true
+    },
+    {
+      "id": "GR9VHDVQM",
+      "title": "Stereopony",
+      "tile_positions": [
+        864,
+        867
+      ],
+      "entries_identical": true
+    },
+    {
+      "id": "GT00371893",
+      "title": "Dorohedoro",
+      "tile_positions": [
+        899,
+        901
+      ],
+      "entries_identical": true
+    },
+    {
+      "id": "GT00365775",
+      "title": "Wash It All Away",
+      "tile_positions": [
+        936,
+        937
+      ],
+      "entries_identical": true
+    },
+    {
+      "id": "GRMGE945R",
+      "title": "Traveling Daru",
+      "tile_positions": [
+        966,
+        974
+      ],
+      "entries_identical": true
+    },
+    {
+      "id": "GT00378122",
+      "title": "The World's Strongest Rearguard",
+      "tile_positions": [
+        1005,
+        1009
+      ],
+      "entries_identical": true
+    },
+    {
+      "id": "GT00371923",
+      "title": "The Klutzy Class Monitor and the Girl with the Short Skirt",
+      "tile_positions": [
+        1080,
+        1083
+      ],
+      "entries_identical": true
+    }
+  ],
+  "duplicate_titles_case_insensitive": {
+    "mobile suit gundam": 2,
+    "wakakozake": 2,
+    "gxyz123": 2,
+    "stereopony": 2,
+    "dorohedoro": 2,
+    "wash it all away": 2,
+    "traveling daru": 2,
+    "the world's strongest rearguard": 2,
+    "the klutzy class monitor and the girl with the short skirt": 2
+  },
+  "stats": {
+    "raw_feed_tiles": 1104,
+    "unique_shows": 1097,
+    "with_awards": 91,
+    "with_images_localized": 1055,
+    "with_content_descriptors": 1042,
+    "empty_descriptions": [
+      "BanG Dream! Movies",
+      "OFFSIDE"
+    ],
+    "type_breakdown": {
+      "series": 1104
+    }
+  }
+}

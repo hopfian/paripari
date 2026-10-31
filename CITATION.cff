@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: >-
+  If you use this census in your research, please cite it and note the
+  census release (region + month) you used. Unofficial dataset — not
+  affiliated with Crunchyroll or Sony.
+title: "paripari: a provenance-complete census of the Crunchyroll catalog"
+type: dataset
+identifiers:
+  - description: "Census release 2026.10-BD (region BD, locale en-US, extracted 2026-10-30/31)"
+    type: "other"
+    value: "census-2026.10-BD"
+authors:
+  - name: "hopfian"
+date-released: "2026-10-31"
+version: "2026.10-BD"
+license:
+  - "MIT"        # code, docs, compilation arrangement
+  - "CC-BY-4.0"  # the compilation, to the extent protectable; underlying metadata (c) its owners
+repository-code: "https://github.com/hopfian/paripari"
+url: "https://github.com/hopfian/paripari"
+keywords:
+  - anime
+  - catalog
+  - census
+  - dataset
+  - crunchyroll
+  - metadata
+  - extraction
+  - verification
+  - provenance
